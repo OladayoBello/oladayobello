@@ -1132,6 +1132,246 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.exp-item').forEach(el => observer.observe(el));
 </script>
 
+<!-- ============================================================
+     OLADAYO'S PORTFOLIO ASSISTANT — DROP-IN WIDGET
+     Paste this entire block just before the closing </body> tag
+     of your existing index.html. All styles are scoped under
+     .oda- classes so they will not affect the rest of your page.
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .oda-launcher{
+    position:fixed;bottom:22px;right:22px;z-index:9999;
+    width:58px;height:58px;border-radius:50%;
+    background:#101B2D;color:#fff;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 30px -8px rgba(16,27,45,.5);
+    font-family:'IBM Plex Mono',monospace;font-size:20px;
+    transition:transform .15s ease;
+  }
+  .oda-launcher:hover{transform:scale(1.06);}
+  .oda-launcher .oda-dot{
+    position:absolute;top:4px;right:4px;width:10px;height:10px;border-radius:50%;
+    background:#2FBF71;border:2px solid #101B2D;
+  }
+  .oda-panel{
+    position:fixed;bottom:92px;right:22px;z-index:9999;
+    width:360px;max-width:calc(100vw - 32px);height:520px;max-height:70vh;
+    background:#fff;border-radius:16px;overflow:hidden;
+    box-shadow:0 24px 60px -16px rgba(16,27,45,.4);
+    display:none;flex-direction:column;
+    font-family:'Inter',sans-serif;color:#1B2433;
+    border:1px solid #DCE3EA;
+  }
+  .oda-panel.oda-open{display:flex;}
+  .oda-head{
+    background:#101B2D;color:#fff;padding:14px 16px;
+    display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+  }
+  .oda-head-title{font-family:'IBM Plex Mono',monospace;font-size:13px;display:flex;align-items:center;gap:8px;}
+  .oda-head-title .oda-live{width:6px;height:6px;border-radius:50%;background:#2FBF71;}
+  .oda-close{background:none;border:none;color:#8FA6C4;font-size:18px;cursor:pointer;line-height:1;}
+  .oda-close:hover{color:#fff;}
+  .oda-tag{padding:8px 16px;font-size:10.5px;color:#5B6B82;background:#F4F6F8;border-bottom:1px solid #DCE3EA;flex-shrink:0;}
+  .oda-chips{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid #DCE3EA;flex-shrink:0;}
+  .oda-chip{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:#101B2D;
+    background:#F4F6F8;border:1px solid #DCE3EA;border-radius:16px;
+    padding:5px 10px;cursor:pointer;white-space:nowrap;
+  }
+  .oda-chip:hover{border-color:#2FBF71;color:#0E8A50;}
+  .oda-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+  .oda-msg{max-width:86%;font-size:13.5px;line-height:1.5;}
+  .oda-msg.oda-user{align-self:flex-end;background:#101B2D;color:#fff;padding:9px 12px;border-radius:10px 10px 2px 10px;}
+  .oda-msg.oda-bot .oda-bubble{background:#F4F6F8;border:1px solid #DCE3EA;padding:10px 12px;border-radius:2px 10px 10px 10px;}
+  .oda-msg.oda-bot .oda-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#5B6B82;display:block;margin-bottom:4px;}
+  .oda-msg.oda-bot.oda-gate .oda-bubble{border-color:#E8A33D;background:#FFF8EC;}
+  .oda-card{margin-top:8px;border:1px solid #DCE3EA;border-radius:8px;padding:10px 12px;font-size:12px;background:#fff;}
+  .oda-card a{color:#101B2D;font-weight:600;text-decoration:none;}
+  .oda-card .oda-row{color:#5B6B82;margin-top:3px;}
+  .oda-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid #DCE3EA;flex-shrink:0;}
+  .oda-input{flex:1;border:1px solid #DCE3EA;border-radius:8px;padding:9px 11px;font-size:13.5px;font-family:'Inter',sans-serif;outline:none;}
+  .oda-input:focus{border-color:#101B2D;}
+  .oda-send{background:#101B2D;color:#fff;border:none;border-radius:8px;padding:0 14px;font-weight:600;font-size:13px;cursor:pointer;}
+  .oda-send:hover{background:#0B1626;}
+  @media (max-width:480px){
+    .oda-panel{right:16px;left:16px;width:auto;}
+  }
+</style>
+
+<button class="oda-launcher" id="odaLauncher" aria-label="Ask Oladayo's assistant">
+  <span>💬</span><span class="oda-dot"></span>
+</button>
+
+<div class="oda-panel" id="odaPanel">
+  <div class="oda-head">
+    <div class="oda-head-title"><span class="oda-live"></span>ask-oladayo</div>
+    <button class="oda-close" id="odaClose" aria-label="Close">✕</button>
+  </div>
+  <div class="oda-tag">professional queries answered directly · personal data routed to Oladayo</div>
+  <div class="oda-chips" id="odaChips"></div>
+  <div class="oda-log" id="odaLog"></div>
+  <div class="oda-input-row">
+    <input class="oda-input" id="odaQ" type="text" placeholder="Ask a question..." autocomplete="off">
+    <button class="oda-send" id="odaSend">Send</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KB = [
+    { kw: ["sponsor","sponsorship","visa","right to work","work permit"],
+      a: "Yes — I'll require Skilled Worker visa sponsorship. My Graduate visa runs to April 2027, so timing works well for a Certificate of Sponsorship within that window." },
+    { kw: ["notice","available","start date","when can you start"],
+      a: "I'm currently working, so notice period depends on the specific role — happy to confirm exact timing once we're discussing a live opportunity." },
+    { kw: ["salary","pay","rate","compensation","package","expect"],
+      a: "My expectations align with UK market rate for a Senior Data/BI Analyst and the relevant Skilled Worker going rate. Happy to discuss specifics directly." },
+    { kw: ["sql"], a: "Advanced, production tested — SQL Server and MySQL, used daily for reporting, validation and analytical modelling." },
+    { kw: ["python"], a: "Advanced working knowledge — Pandas and NumPy for cleaning, transformation and automation." },
+    { kw: ["power bi","powerbi","dax"], a: "Advanced, production tested — dashboard design, data modelling and DAX for KPI and performance reporting." },
+    { kw: ["tableau"], a: "Advanced — used for visualisation and stakeholder facing dashboards." },
+    { kw: ["excel"], a: "Advanced — Power Query, Power Pivot, complex formulas, used throughout my career." },
+    { kw: ["azure","aws","cloud","synapse","fabric","snowflake"],
+      a: "I've studied Azure Data Factory and AWS with some hands on exposure, though I'd call this developing rather than advanced — happy to be transparent about where I am on cloud tooling." },
+    { kw: ["experience","background","career","history","worked"],
+      a: "Ten years across data analytics and BI: Senior Data Analyst at NISER, Data Manager on a USAID programme, Exams Administrator at Windsor Forest Colleges Group, and currently Subject Matter Expert Consultant at Gateway Qualifications." },
+    { kw: ["education","degree","qualification","masters","msc","btech","university"],
+      a: "MSc Cybersecurity (Distinction, Buckinghamshire New University), MSc Information Science (Distinction, University of Ibadan), and a BTech in Computer Science (Second Class Division, LAUTECH)." },
+    { kw: ["location","based","live","relocate","dartford"],
+      a: "Based in Dartford, Kent, UK. Open to relocating anywhere in the UK for the right role." },
+    { kw: ["cv","resume","portfolio","github","work samples"],
+      a: "You're already on it — this page is my portfolio. My CV is available on request via email." },
+    { kw: ["contact","email","phone","reach","call","linkedin"],
+      a: "Best reached by email at bello.oladayo2011@yahoo.com or phone at 07979 618740. LinkedIn is linkedin.com/in/oladayo-bello." },
+    { kw: ["why looking","leaving","current role","reason"],
+      a: "I'm looking for a permanent, sponsorship backed role where I can apply BI and data analytics at a larger scale — happy to talk through this directly." },
+    { kw: ["goal","aspiration","ambition","future plan","long term","career plan","aim to","where do you see"],
+      a: "My goal is to grow into a senior data and BI leadership role in the UK, building governed, decision ready reporting that changes how an organisation operates, and to build a long term career here on a permanent, sponsorship backed basis." }
+  ];
+
+  var SENSITIVE_TOPICS = [
+    { label: "date of birth", kw: ["date of birth","dob","birthday","how old","your age","born on"] },
+    { label: "place of birth", kw: ["place of birth","where were you born","birthplace","hometown"] },
+    { label: "family members", kw: ["wife","spouse","married","husband","children","kids","son","daughter","family member","parents","siblings"] },
+    { label: "home address", kw: ["home address","where do you live exactly","postcode","house number","street address"] }
+  ];
+  var EMPLOYER_SIGNAL = ["hire","hiring","recruit","recruiter","employer","job offer","role for you","position","opportunity","considering you","interview","vacancy","sponsor you"];
+  var FALLBACK = "I don't have a confident answer to that — rather than guess, let me connect you with Oladayo directly.";
+
+  function scoreMatch(text){
+    var t = text.toLowerCase(), best=null, bestScore=0;
+    KB.forEach(function(e){
+      var s=0; e.kw.forEach(function(k){ if(t.indexOf(k)!==-1) s+=k.split(' ').length; });
+      if(s>bestScore){bestScore=s;best=e;}
+    });
+    return bestScore>0?best:null;
+  }
+  function matchSensitive(text){
+    var t=text.toLowerCase(), found=null;
+    SENSITIVE_TOPICS.forEach(function(topic){
+      topic.kw.forEach(function(k){ if(t.indexOf(k)!==-1) found=topic; });
+    });
+    return found;
+  }
+  function isEmployerIntent(text){
+    var t=text.toLowerCase();
+    return EMPLOYER_SIGNAL.some(function(k){ return t.indexOf(k)!==-1; });
+  }
+
+  var log = document.getElementById('odaLog');
+  var input = document.getElementById('odaQ');
+  var pendingSensitive = null;
+  var contactCardHTML = 'Reach Oladayo directly:' +
+    '<div class="oda-row">📧 <a href="mailto:bello.oladayo2011@yahoo.com">bello.oladayo2011@yahoo.com</a></div>' +
+    '<div class="oda-row">📞 <a href="tel:+447979618740">07979 618740</a></div>' +
+    '<div class="oda-row">💼 <a href="https://www.linkedin.com/in/oladayo-bello" target="_blank">linkedin.com/in/oladayo-bello</a></div>';
+
+  function addUser(text){
+    var d=document.createElement('div'); d.className='oda-msg oda-user'; d.textContent=text;
+    log.appendChild(d); log.scrollTop=log.scrollHeight;
+  }
+  function addBot(text, opts){
+    opts = opts || {};
+    var d=document.createElement('div'); d.className='oda-msg oda-bot'+(opts.gate?' oda-gate':'');
+    var label=document.createElement('span'); label.className='oda-label';
+    label.textContent = opts.gate ? (opts.labelText||'PERSONAL DATA REQUEST') : (opts.labelText||'FROM KNOWLEDGE BASE');
+    var bubble=document.createElement('div'); bubble.className='oda-bubble'; bubble.textContent=text;
+    d.appendChild(label); d.appendChild(bubble);
+    if(opts.card){
+      var card=document.createElement('div'); card.className='oda-card'; card.innerHTML=contactCardHTML;
+      d.appendChild(card);
+    }
+    log.appendChild(d); log.scrollTop=log.scrollHeight;
+  }
+
+  function handleQuery(text){
+    if(!text.trim()) return;
+    addUser(text);
+
+    if(pendingSensitive){
+      var employer = isEmployerIntent(text);
+      pendingSensitive = null;
+      setTimeout(function(){
+        addBot(
+          employer
+            ? "Thank you — as this relates to a hiring decision, I've noted it as a priority. Oladayo reviews these personally and will follow up with you directly."
+            : "Thank you for explaining. Personal details of this kind are only shared by Oladayo directly, so please reach out below and he will follow up personally.",
+          { gate:true, labelText: employer?'PRIORITY — EMPLOYER ENQUIRY':'FORWARDED FOR REVIEW', card:true }
+        );
+      }, 350);
+      return;
+    }
+
+    var sensitive = matchSensitive(text);
+    if(sensitive){
+      pendingSensitive = sensitive;
+      setTimeout(function(){
+        addBot("That touches on "+sensitive.label+", which I treat as personal data. Could you tell me who is asking, which organisation you represent, and the purpose of your enquiry? I'll pass it to Oladayo directly.", {gate:true});
+      }, 250);
+      return;
+    }
+
+    var match = scoreMatch(text);
+    setTimeout(function(){
+      if(match){ addBot(match.a); }
+      else{ addBot(FALLBACK, {labelText:'NOT CONFIDENT — ESCALATING', gate:true, card:true}); }
+    }, 250);
+  }
+
+  document.getElementById('odaSend').addEventListener('click', function(){
+    handleQuery(input.value); input.value='';
+  });
+  input.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ handleQuery(input.value); input.value=''; }
+  });
+
+  var suggestions = ["Do you need visa sponsorship?","What's your Power BI experience?","Where are you based?","What are your career goals?"];
+  var chipsWrap = document.getElementById('odaChips');
+  suggestions.forEach(function(s){
+    var c=document.createElement('div'); c.className='oda-chip'; c.textContent=s;
+    c.addEventListener('click', function(){ handleQuery(s); });
+    chipsWrap.appendChild(c);
+  });
+
+  var launcher = document.getElementById('odaLauncher');
+  var panel = document.getElementById('odaPanel');
+  var closeBtn = document.getElementById('odaClose');
+  var greeted = false;
+  launcher.addEventListener('click', function(){
+    panel.classList.toggle('oda-open');
+    if(!greeted && panel.classList.contains('oda-open')){
+      greeted = true;
+      addBot("Good day, thank you for stopping by. I can speak to Oladayo's experience, skills, visa status and goals directly. Questions about personal matters are routed to him under his data protection policy, with priority given to genuine employer enquiries.");
+    }
+  });
+  closeBtn.addEventListener('click', function(){ panel.classList.remove('oda-open'); });
+})();
+</script>
+<!-- ============================================================
+     END OF DROP-IN WIDGET
+     ============================================================ -->
+    
+
 </body>
 </html>
 
