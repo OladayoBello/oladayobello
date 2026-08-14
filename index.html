@@ -1,1377 +1,452 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oladayo Bello — Senior Data Analyst</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>Oladayo Bello — Data Analyst</title>
+<meta name="description" content="Oladayo Bello, Data Analyst and Data Manager specialising in SQL, Python, Power BI and Tableau.">
 <style>
-:root {
-  --bg: #070A0F;
-  --surface: #0D1117;
-  --surface2: #131920;
-  --border: #1C2733;
-  --teal: #0ABFAC;
-  --teal-dim: #073D38;
-  --gold: #C49A2A;
-  --gold-dim: #3D2F0A;
-  --white: #EDF2F7;
-  --muted: #5A7A8A;
-  --text: #C8D8E4;
-}
+  :root{
+    --navy:#0D2B4E;
+    --navy-dark:#08192F;
+    --green:#1D9E75;
+    --green-dark:#0F6E56;
+    --bg:#F7F8FA;
+    --card:#FFFFFF;
+    --text:#1D2228;
+    --muted:#5C6470;
+    --border:#E3E7EC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  header{
+    position:sticky;top:0;z-index:20;
+    background:var(--navy);
+    color:#fff;
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-weight:700;letter-spacing:0.5px;}
+  nav ul{list-style:none;display:flex;gap:24px;}
+  nav a{font-size:14px;color:#CBD5E1;transition:color .2s;}
+  nav a:hover{color:var(--green);}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .hero{
+    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-dark) 100%);
+    color:#fff;
+    padding:72px 0 56px;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    color:var(--green);
+    background:rgba(29,158,117,0.15);
+    border:1px solid rgba(29,158,117,0.4);
+    padding:4px 12px;
+    border-radius:20px;
+    margin-bottom:20px;
+  }
+  h1{font-size:40px;font-weight:700;margin-bottom:8px;}
+  .role{font-size:20px;color:#9FE1CB;font-weight:500;margin-bottom:20px;}
+  .lede{max-width:680px;color:#CBD5E1;font-size:16px;margin-bottom:28px;}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:11px 22px;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:600;
+  }
+  .btn-primary{background:var(--green);color:#fff;}
+  .btn-primary:hover{background:var(--green-dark);}
+  .btn-ghost{border:1px solid #4B6280;color:#fff;}
+  .btn-ghost:hover{border-color:var(--green);}
 
-html { scroll-behavior: smooth; }
+  .metrics{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:16px;
+    margin-top:48px;
+  }
+  .metric{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:18px 12px;
+    text-align:center;
+  }
+  .metric .num{font-size:26px;font-weight:700;color:var(--green);}
+  .metric .label{font-size:12px;color:#9AAAC0;margin-top:4px;line-height:1.4;}
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
+  section{padding:56px 0;}
+  .section-eyebrow{font-size:13px;color:var(--green-dark);font-weight:700;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+  h2{font-size:26px;font-weight:700;margin-bottom:28px;}
 
-/* ── GRID BACKGROUND ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(10,191,172,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(10,191,172,0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  z-index: 0;
-}
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+  }
+  .skill-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:18px;
+  }
+  .skill-card .icon{
+    width:32px;height:32px;border-radius:8px;
+    background:rgba(29,158,117,0.12);
+    color:var(--green-dark);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;margin-bottom:10px;
+  }
+  .skill-card h3{font-size:15px;margin-bottom:6px;}
+  .skill-card p{font-size:13px;color:var(--muted);}
 
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 0 40px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(7,10,15,0.92);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-}
-.nav-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 16px;
-  color: var(--teal);
-  letter-spacing: 1px;
-}
-.nav-links { display: flex; gap: 28px; list-style: none; }
-.nav-links a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--teal); }
+  .exp-item{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px;
+    margin-bottom:16px;
+  }
+  .exp-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
+  .exp-title{font-size:17px;font-weight:700;}
+  .exp-org{font-size:14px;color:var(--green-dark);font-weight:600;}
+  .exp-dates{font-size:13px;color:var(--muted);white-space:nowrap;}
+  .exp-item ul{margin:12px 0 12px 18px;}
+  .exp-item li{font-size:14px;color:var(--text);margin-bottom:6px;}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .tag{
+    font-size:11px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--muted);
+    padding:3px 9px;
+    border-radius:20px;
+  }
 
-/* ── WRAPPER ── */
-.wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .impact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .impact-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px;
+  }
+  .impact-card .num{font-size:30px;font-weight:700;color:var(--navy);}
+  .impact-card .desc{font-size:13px;color:var(--muted);margin:8px 0;}
+  .impact-card .src{font-size:11px;color:var(--green-dark);font-weight:600;text-transform:uppercase;}
 
-/* ── HERO ── */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding-top: 60px;
-  position: relative;
-}
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 80px;
-  align-items: center;
-  width: 100%;
-}
-.hero-tag {
-  display: inline-block;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--teal);
-  border: 1px solid var(--teal-dim);
-  background: rgba(10,191,172,0.05);
-  padding: 5px 14px;
-  margin-bottom: 24px;
-}
-.hero-name {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(42px, 6vw, 72px);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -2px;
-  color: var(--white);
-  margin-bottom: 8px;
-}
-.hero-name span { color: var(--teal); }
-.hero-title {
-  font-family: 'Lora', serif;
-  font-size: 20px;
-  font-style: italic;
-  color: var(--gold);
-  margin-bottom: 28px;
-}
-.hero-bio {
-  color: var(--text);
-  font-size: 14px;
-  line-height: 1.8;
-  max-width: 520px;
-  margin-bottom: 36px;
-}
-.hero-cta {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.btn-primary {
-  display: inline-block;
-  padding: 12px 28px;
-  background: var(--teal);
-  color: var(--bg);
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.btn-primary:hover { background: #08A090; }
-.btn-outline {
-  display: inline-block;
-  padding: 12px 28px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+  .cert-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .cert-card .org{font-size:12px;color:var(--green-dark);font-weight:700;text-transform:uppercase;}
+  .cert-card h3{font-size:14px;margin:4px 0;}
+  .cert-card .date{font-size:12px;color:var(--muted);}
 
-/* STATS CARD */
-.stats-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 32px;
-}
-.stats-card-header {
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.stats-card-header::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-.stat-item {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-}
-.stat-item:last-child { border-bottom: none; }
-.stat-num {
-  font-family: 'Syne', sans-serif;
-  font-size: 36px;
-  font-weight: 800;
-  line-height: 1;
-}
-.stat-num.teal { color: var(--teal); }
-.stat-num.gold { color: var(--gold); }
-.stat-num.white { color: var(--white); }
-.stat-label { font-size: 12px; color: var(--muted); text-align: right; max-width: 180px; }
+  .edu-item{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:14px;
+  }
+  .edu-item h3{font-size:16px;}
+  .edu-item .badge{
+    display:inline-block;
+    font-size:11px;
+    background:rgba(29,158,117,0.12);
+    color:var(--green-dark);
+    padding:2px 9px;
+    border-radius:20px;
+    margin-left:8px;
+  }
+  .edu-item .org{font-size:14px;color:var(--muted);margin-top:2px;}
+  .edu-item .modules{font-size:13px;color:var(--muted);margin-top:8px;}
 
-/* ── SECTION COMMON ── */
-section { padding: 100px 0; }
-.section-label {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 12px;
-}
-.section-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: -1px;
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-.section-rule {
-  height: 1px;
-  background: var(--border);
-  margin-bottom: 60px;
-  position: relative;
-}
-.section-rule::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0;
-  width: 80px; height: 2px;
-  background: var(--teal);
-  top: -0.5px;
-}
+  footer{
+    background:var(--navy-dark);
+    color:#CBD5E1;
+    padding:48px 0;
+    text-align:center;
+  }
+  footer h2{color:#fff;font-size:22px;margin-bottom:12px;}
+  footer .quote{font-style:italic;color:#9AAAC0;max-width:520px;margin:0 auto 20px;}
+  footer .contact-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:14px;margin-bottom:16px;}
+  footer .fine{font-size:12px;color:#6B7C93;}
 
-/* ── SKILLS ── */
-#skills { background: var(--surface); }
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2px;
-  background: var(--border);
-}
-.skill-block {
-  background: var(--surface);
-  padding: 28px 24px;
-  transition: background 0.2s;
-}
-.skill-block:hover { background: var(--surface2); }
-.skill-icon {
-  font-size: 24px;
-  margin-bottom: 12px;
-  display: block;
-}
-.skill-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 10px;
-}
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.skill-tag {
-  font-size: 10px;
-  padding: 2px 8px;
-  background: var(--teal-dim);
-  color: var(--teal);
-  letter-spacing: 0.5px;
-}
-.skill-tag.gold {
-  background: var(--gold-dim);
-  color: var(--gold);
-}
-
-/* ── EXPERIENCE ── */
-.exp-timeline { position: relative; }
-.exp-timeline::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 1px;
-  background: var(--border);
-}
-.exp-item {
-  position: relative;
-  padding: 0 0 60px 40px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.exp-item.visible { opacity: 1; transform: translateY(0); }
-.exp-dot {
-  position: absolute;
-  left: -5px; top: 8px;
-  width: 10px; height: 10px;
-  background: var(--teal);
-  border: 2px solid var(--bg);
-}
-.exp-date {
-  font-size: 11px;
-  color: var(--teal);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.exp-role {
-  font-family: 'Syne', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 4px;
-}
-.exp-org {
-  font-size: 13px;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-.exp-bullets { list-style: none; }
-.exp-bullets li {
-  padding: 6px 0;
-  padding-left: 18px;
-  position: relative;
-  color: var(--text);
-  font-size: 13px;
-  border-bottom: 1px solid rgba(28,39,51,0.5);
-}
-.exp-bullets li:last-child { border-bottom: none; }
-.exp-bullets li::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: var(--teal);
-}
-.exp-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
-}
-.exp-tag {
-  font-size: 10px;
-  padding: 3px 10px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  letter-spacing: 0.5px;
-}
-
-/* ── ACHIEVEMENTS ── */
-#achievements { background: var(--surface); }
-.achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2px;
-  background: var(--border);
-}
-.ach-card {
-  background: var(--surface);
-  padding: 32px 28px;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.2s;
-}
-.ach-card:hover { background: var(--surface2); }
-.ach-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px; height: 100%;
-  background: var(--teal);
-}
-.ach-card.gold-accent::before { background: var(--gold); }
-.ach-num {
-  font-family: 'Syne', sans-serif;
-  font-size: 52px;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--teal);
-  margin-bottom: 8px;
-}
-.ach-card.gold-accent .ach-num { color: var(--gold); }
-.ach-desc {
-  font-size: 13px;
-  color: var(--text);
-  line-height: 1.6;
-}
-.ach-source {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 8px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-/* ── CERTIFICATIONS ── */
-.certs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-}
-.cert-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 20px;
-  transition: all 0.2s;
-  position: relative;
-}
-.cert-card:hover {
-  border-color: var(--teal);
-  background: var(--surface2);
-}
-.cert-issuer {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 8px;
-}
-.cert-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 6px;
-  line-height: 1.3;
-}
-.cert-date {
-  font-size: 11px;
-  color: var(--muted);
-}
-.cert-skills {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-.cert-skill {
-  font-size: 9px;
-  padding: 2px 6px;
-  background: rgba(10,191,172,0.07);
-  color: var(--teal);
-  border: 1px solid var(--teal-dim);
-}
-
-/* ── EDUCATION ── */
-.edu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2px;
-  background: var(--border);
-}
-.edu-card {
-  background: var(--surface);
-  padding: 32px 28px;
-  transition: background 0.2s;
-}
-.edu-card:hover { background: var(--surface2); }
-.edu-degree {
-  font-family: 'Syne', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 6px;
-  line-height: 1.3;
-}
-.edu-grade {
-  display: inline-block;
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  background: var(--teal-dim);
-  color: var(--teal);
-  margin-bottom: 10px;
-}
-.edu-grade.gold {
-  background: var(--gold-dim);
-  color: var(--gold);
-}
-.edu-uni {
-  font-size: 13px;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-.edu-year {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 1px;
-}
-.edu-modules {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 12px;
-  font-style: italic;
-  line-height: 1.6;
-}
-
-/* ── CONTACT ── */
-#contact {
-  background: var(--surface);
-  text-align: center;
-}
-.contact-inner { max-width: 600px; margin: 0 auto; }
-.contact-quote {
-  font-family: 'Lora', serif;
-  font-size: 22px;
-  font-style: italic;
-  color: var(--white);
-  margin-bottom: 40px;
-  line-height: 1.5;
-}
-.contact-links {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-.contact-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border: 1px solid var(--border);
-  color: var(--text);
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 1px;
-  transition: all 0.2s;
-}
-.contact-link:hover { border-color: var(--teal); color: var(--teal); }
-.contact-link .dot { width: 6px; height: 6px; background: var(--teal); display: block; }
-.availability {
-  display: inline-block;
-  padding: 10px 24px;
-  background: rgba(10,191,172,0.1);
-  border: 1px solid var(--teal);
-  color: var(--teal);
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.availability::before {
-  content: '●';
-  margin-right: 8px;
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-/* ── FOOTER ── */
-footer {
-  padding: 24px 40px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
-@keyframes fadeUp   { from{opacity:0;transform:translateY(20px)}  to{opacity:1;transform:translateY(0)} }
-@keyframes countUp  { from{opacity:0} to{opacity:1} }
-
-.hero-tag   { animation: fadeDown 0.5s 0.1s ease both; }
-.hero-name  { animation: fadeDown 0.5s 0.2s ease both; }
-.hero-title { animation: fadeDown 0.5s 0.3s ease both; }
-.hero-bio   { animation: fadeUp  0.5s 0.4s ease both; }
-.hero-cta   { animation: fadeUp  0.5s 0.5s ease both; }
-.stats-card { animation: fadeUp  0.6s 0.4s ease both; }
-
-/* ── RESPONSIVE ── */
-@media(max-width:860px){
-  .hero-inner{ grid-template-columns:1fr; gap:40px; }
-  .stats-card{ display:none; }
-  nav{ padding:0 20px; }
-  .wrap{ padding:0 20px; }
-  .nav-links{ gap:16px; }
-}
+  @media (max-width:860px){
+    .metrics{grid-template-columns:repeat(3,1fr);}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    .impact-grid{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+    nav ul{display:none;}
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">OB / Portfolio</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#achievements">Impact</a></li>
-    <li><a href="#certifications">Certs</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<header>
+  <div class="wrap">
+    <div class="logo">OB / Portfolio</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#achievements">Impact</a></li>
+        <li><a href="#certifications">Certs</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<!-- HERO -->
-<section id="about">
-<div class="wrap">
-  <div class="hero-inner">
-    <div>
-      <div class="hero-tag">Available Immediately &nbsp;·&nbsp; London Area, UK</div>
-      <h1 class="hero-name">Oladayo<br><span>Bello</span></h1>
-      <div class="hero-title">Senior Data Analyst &amp; Data Manager</div>
-      <p class="hero-bio">
-        Ten years of turning complex, messy data into decisions that organisations act on. 
-        I build the pipelines, dashboards and governance frameworks that make data 
-        trustworthy — then communicate what it means to the people who need to use it. 
-        Dual Masters in Cybersecurity and Information Science both with Distinctions alongside deep expertise in SQL, Python, Power BI and Tableau.
-      </p>
-      <div class="hero-cta">
-        <a href="mailto:bello.oladayo2011@yahoo.com" class="btn-primary">Get In Touch</a>
-        <a href="https://www.linkedin.com/in/oladayo-bello" target="_blank" class="btn-outline">LinkedIn Profile</a>
-      </div>
+<section class="hero" id="about">
+  <div class="wrap">
+    <span class="eyebrow">Available immediately · London area, UK</span>
+    <h1>Oladayo Bello</h1>
+    <p class="role">Data Analyst &amp; Data Manager</p>
+    <p class="lede">
+      Ten years of turning complex, messy data into decisions that organisations act on.
+      I build the pipelines, dashboards and governance frameworks that make data
+      trustworthy, then communicate what it means to the people who need to use it.
+      Dual Masters in Cybersecurity and Information Science, both with Distinctions,
+      alongside deep expertise in SQL, Python, Power BI and Tableau.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:bello.oladayo2011@yahoo.com">Get in touch</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/oladayo-bello" target="_blank" rel="noopener">LinkedIn profile</a>
     </div>
 
-    <div class="stats-card">
-      <div class="stats-card-header">Career Metrics</div>
-      <div class="stat-item">
-        <div class="stat-num teal" data-target="40">0</div>
-        <div class="stat-label">% reduction in reporting errors at USAID</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num teal" data-target="90">0</div>
-        <div class="stat-label">% faster analytical turnaround at NISER</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num gold" data-target="35">0</div>
-        <div class="stat-label">+ data professionals trained</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num gold" data-target="10">0</div>
-        <div class="stat-label">+ years of hands-on experience</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num white" data-target="11">0</div>
-        <div class="stat-label">professional certifications earned</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num white" data-target="6">0</div>
-        <div class="stat-label">regions covered at national policy level</div>
-      </div>
+    <div class="metrics">
+      <div class="metric"><div class="num">40%</div><div class="label">reduction in reporting errors at USAID</div></div>
+      <div class="metric"><div class="num">90%</div><div class="label">faster analytical turnaround at NISER</div></div>
+      <div class="metric"><div class="num">35+</div><div class="label">data professionals trained</div></div>
+      <div class="metric"><div class="num">10+</div><div class="label">years of hands on experience</div></div>
+      <div class="metric"><div class="num">11</div><div class="label">professional certifications earned</div></div>
+      <div class="metric"><div class="num">6</div><div class="label">regions covered at national policy level</div></div>
     </div>
   </div>
-</div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
-<div class="wrap">
-  <div class="section-label">Expertise</div>
-  <h2 class="section-title">Core Skills</h2>
-  <div class="section-rule"></div>
-  <div class="skills-grid">
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">SQL &amp; Databases</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Oracle</span>
-        <span class="skill-tag">SQL Server</span>
-        <span class="skill-tag">Window Functions</span>
-        <span class="skill-tag">Complex Querying</span>
-        <span class="skill-tag">Stored Procedures</span>
-      </div>
+  <div class="wrap">
+    <div class="section-eyebrow">Expertise</div>
+    <h2>Core skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="icon">DB</div><h3>SQL &amp; databases</h3><p>Oracle, SQL Server, complex querying, window functions, stored procedures, database administration</p></div>
+      <div class="skill-card"><div class="icon">PY</div><h3>Python</h3><p>Pandas, NumPy, validation pipelines, workflow automation, data cleaning, EDA, scripting</p></div>
+      <div class="skill-card"><div class="icon">BI</div><h3>Visualisation &amp; BI</h3><p>Power BI (DAX, data models, paginated reports), Tableau, advanced Excel, Power Query</p></div>
+      <div class="skill-card"><div class="icon">GV</div><h3>Data governance</h3><p>GDPR, ISO 27001, data quality frameworks, audit ready records, data integrity, stewardship</p></div>
+      <div class="skill-card"><div class="icon">CS</div><h3>Cybersecurity</h3><p>MSc Distinction, NIST CSF, risk management, digital forensics, network security</p></div>
+      <div class="skill-card"><div class="icon">CL</div><h3>Cloud &amp; infrastructure</h3><p>AWS Cloud Foundations, cloud security, data lake concepts, Azure awareness, Git</p></div>
+      <div class="skill-card"><div class="icon">AN</div><h3>Analytics</h3><p>Cohort analysis, KPI reporting, customer segmentation, trend analysis, A/B testing awareness</p></div>
+      <div class="skill-card"><div class="icon">BR</div><h3>BI &amp; reporting</h3><p>Executive dashboards, donor level reporting, non technical translation, stakeholder briefings</p></div>
+      <div class="skill-card"><div class="icon">LD</div><h3>Leadership</h3><p>Multi site team management, 35+ professionals trained, mentoring, coaching, curriculum design</p></div>
+      <div class="skill-card"><div class="icon">TL</div><h3>Tools</h3><p>Microsoft 365, SharePoint, Teams, Jira, Microsoft Project, Visio, Canva, Adobe Express, Git version control</p></div>
+      <div class="skill-card"><div class="icon">SP</div><h3>Statistical &amp; predictive</h3><p>Statistical analysis, hypothesis testing, predictive analytics and forecasting, machine learning fundamentals, R programming</p></div>
+      <div class="skill-card"><div class="icon">ET</div><h3>ETL &amp; data warehousing</h3><p>ETL development, Azure Data Factory, Azure Synapse, Snowflake, Amazon Redshift, data modelling and database design</p></div>
+      <div class="skill-card"><div class="icon">MD</div><h3>Methodology &amp; delivery</h3><p>Agile, Scrum, Waterfall, PRINCE2, requirements gathering and business analysis, process mapping, root cause analysis</p></div>
     </div>
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">Python</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Pandas</span>
-        <span class="skill-tag">NumPy</span>
-        <span class="skill-tag">Automation</span>
-        <span class="skill-tag">Validation Pipelines</span>
-        <span class="skill-tag">EDA</span>
-      </div>
-    </div>
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">Visualisation &amp; BI</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Power BI</span>
-        <span class="skill-tag">DAX</span>
-        <span class="skill-tag">Tableau</span>
-        <span class="skill-tag">Excel Dashboards</span>
-        <span class="skill-tag">Power Query</span>
-      </div>
-    </div>
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">Data Governance</div>
-      <div class="skill-tags">
-        <span class="skill-tag">GDPR</span>
-        <span class="skill-tag">ISO 27001</span>
-        <span class="skill-tag">Data Quality</span>
-        <span class="skill-tag">Audit Frameworks</span>
-        <span class="skill-tag">Data Integrity</span>
-      </div>
-    </div>
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">Cybersecurity</div>
-      <div class="skill-tags">
-        <span class="skill-tag gold">MSc Distinction</span>
-        <span class="skill-tag gold">NIST CSF</span>
-        <span class="skill-tag gold">Risk Management</span>
-        <span class="skill-tag gold">Digital Forensics</span>
-        <span class="skill-tag gold">Network Security</span>
-      </div>
-    </div>
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">Cloud &amp; Infrastructure</div>
-      <div class="skill-tags">
-        <span class="skill-tag gold">AWS</span>
-        <span class="skill-tag gold">Cloud Security</span>
-        <span class="skill-tag gold">Data Lake</span>
-        <span class="skill-tag">Azure Awareness</span>
-        <span class="skill-tag">Git</span>
-      </div>
-    </div>
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">Analytics</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Cohort Analysis</span>
-        <span class="skill-tag">KPI Reporting</span>
-        <span class="skill-tag">Segmentation</span>
-        <span class="skill-tag">Trend Analysis</span>
-        <span class="skill-tag">Policy Research</span>
-      </div>
-    </div>
-
-    <div class="skill-block">
-      <span class="skill-icon">⬡</span>
-      <div class="skill-name">Communication</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Executive Reporting</span>
-        <span class="skill-tag">Donor Briefings</span>
-        <span class="skill-tag">Staff Training</span>
-        <span class="skill-tag">Stakeholder Mgmt</span>
-      </div>
-    </div>
-
   </div>
-</div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
-<div class="wrap">
-  <div class="section-label">Work History</div>
-  <h2 class="section-title">Experience</h2>
-  <div class="section-rule"></div>
-
-  <div class="exp-timeline">
+  <div class="wrap">
+    <div class="section-eyebrow">Work history</div>
+    <h2>Experience</h2>
 
     <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-date">Jul 2025 — Present</div>
-      <div class="exp-role">Subject Matter Expert — Data Analytics</div>
-      <div class="exp-org">Gateway Qualifications &nbsp;·&nbsp; UK</div>
-      <ul class="exp-bullets">
-        <li>Designed SQL, Python and Power BI curriculum built entirely on real-world datasets</li>
-        <li>Built 10 practical exercises covering data cleaning, transformation, visualisation and interpretation</li>
-        <li>Content reviewed and validated against current industry standards for vocational qualifications</li>
-      </ul>
-      <div class="exp-tags">
-        <span class="exp-tag">Curriculum Design</span>
-        <span class="exp-tag">SQL</span>
-        <span class="exp-tag">Python</span>
-        <span class="exp-tag">Power BI</span>
-        <span class="exp-tag">Education</span>
+      <div class="exp-head">
+        <div>
+          <div class="exp-title">Subject Matter Expert, Data Analytics</div>
+          <div class="exp-org">Gateway Qualifications · UK</div>
+        </div>
+        <div class="exp-dates">Jul 2025 — Present</div>
       </div>
+      <ul>
+        <li>Designed SQL, Python and Power BI curriculum built entirely on real world datasets, reviewed against current industry standards</li>
+        <li>Produced structured assessment materials covering data cleaning, transformation, visualisation and interpretation to publication ready standard</li>
+        <li>Produced Business Requirements Documents, functional specifications and Standard Operating Procedures translating stakeholder needs into audit ready deliverables</li>
+        <li>Applied ETL processes and data governance controls across curriculum datasets, embedding master data management standards</li>
+      </ul>
+      <div class="tags"><span class="tag">Curriculum design</span><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">Data governance</span></div>
     </div>
 
     <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-date">Mar 2024 — Oct 2025</div>
-      <div class="exp-role">Exams Administrator</div>
-      <div class="exp-org">Windsor Forest Colleges Group &nbsp;·&nbsp; UK</div>
-      <ul class="exp-bullets">
+      <div class="exp-head">
+        <div>
+          <div class="exp-title">Exams Administrator</div>
+          <div class="exp-org">Windsor Forest Colleges Group · UK</div>
+        </div>
+        <div class="exp-dates">Mar 2024 — Oct 2025</div>
+      </div>
+      <ul>
         <li>Produced statutory compliance and performance reports maintaining 100% accuracy across every reporting period</li>
-        <li>Identified process gaps and implemented fixes adopted department-wide, improving cross-functional reporting consistency</li>
+        <li>Identified process gaps and implemented fixes adopted department wide, improving cross functional reporting consistency</li>
+        <li>Used Microsoft 365 suite at advanced level daily, including Excel, Word, SharePoint and Teams, for information management and multi stakeholder reporting</li>
       </ul>
-      <div class="exp-tags">
-        <span class="exp-tag">Compliance Reporting</span>
-        <span class="exp-tag">Data Accuracy</span>
-        <span class="exp-tag">UK Education</span>
-        <span class="exp-tag">Process Improvement</span>
-      </div>
+      <div class="tags"><span class="tag">Compliance reporting</span><span class="tag">Data accuracy</span><span class="tag">UK education</span><span class="tag">Process improvement</span></div>
     </div>
 
     <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-date">Feb 2023 — Aug 2024</div>
-      <div class="exp-role">Data Manager (Consultant)</div>
-      <div class="exp-org">USAID — LEARN to Read Project &nbsp;·&nbsp; Multi-State Programme</div>
-      <ul class="exp-bullets">
-        <li>Cleaned and linked large-scale datasets across 3 states, resolving field inconsistencies blocking accurate reporting</li>
-        <li>Built Power BI and Tableau dashboards adopted as the sole performance tracking tool by programme leadership</li>
+      <div class="exp-head">
+        <div>
+          <div class="exp-title">Data Manager (Consultant)</div>
+          <div class="exp-org">USAID, LEARN to Read Programme · Multi state programme</div>
+        </div>
+        <div class="exp-dates">Feb 2023 — Aug 2024</div>
+      </div>
+      <ul>
+        <li>Led data operations and analytics delivery across a three state education programme serving over 100,000 beneficiaries, reporting directly to international donors</li>
+        <li>Cleaned and linked large scale datasets across three states, resolving field inconsistencies blocking accurate reporting</li>
+        <li>Built Power BI and Tableau dashboards adopted as the primary performance tracking tool by programme leadership</li>
         <li>Cut reporting errors by 40% and data turnaround by 45% through automated Python validation pipelines</li>
-        <li>Wrote KPI and acquisition reports delivered directly to USAID donors each cycle, translating raw data into clear findings</li>
         <li>Trained 35 data officers in SQL collection standards and data quality processes</li>
       </ul>
-      <div class="exp-tags">
-        <span class="exp-tag">Python</span>
-        <span class="exp-tag">Power BI</span>
-        <span class="exp-tag">Tableau</span>
-        <span class="exp-tag">Data Governance</span>
-        <span class="exp-tag">USAID</span>
-        <span class="exp-tag">Team Training</span>
-      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Data governance</span><span class="tag">USAID</span><span class="tag">Team training</span></div>
     </div>
 
     <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-date">Dec 2019 — Nov 2023</div>
-      <div class="exp-role">Senior Data Analyst</div>
-      <div class="exp-org">Nigerian Institute of Social and Economic Research (NISER)</div>
-      <ul class="exp-bullets">
-        <li>Analysed quantitative and qualitative datasets across 6 geopolitical regions — findings fed into national policy recommendations</li>
-        <li>Automated reporting workflows in Python, cutting end-to-end turnaround by 90%</li>
+      <div class="exp-head">
+        <div>
+          <div class="exp-title">Data Analyst and Analytics Manager</div>
+          <div class="exp-org">Nigerian Institute of Social and Economic Research (NISER)</div>
+        </div>
+        <div class="exp-dates">Dec 2019 — Nov 2023</div>
+      </div>
+      <ul>
+        <li>Analysed quantitative and qualitative datasets across six geopolitical regions, with findings feeding into national policy recommendations</li>
+        <li>Automated reporting workflows in Python, cutting end to end turnaround by 90%</li>
         <li>Cleaned and transformed large field datasets using SQL and Python ahead of every analysis cycle</li>
-        <li>Segmented user base and programme participant data to support strategic planning across 6 zones</li>
-        <li>Coached junior analysts in statistical techniques and data quality over 4 years</li>
+        <li>Segmented user base and programme participant data to support strategic planning across six zones</li>
+        <li>Coached junior analysts in statistical techniques and data quality over four years</li>
       </ul>
-      <div class="exp-tags">
-        <span class="exp-tag">SQL</span>
-        <span class="exp-tag">Python</span>
-        <span class="exp-tag">Policy Research</span>
-        <span class="exp-tag">Workflow Automation</span>
-        <span class="exp-tag">Mentoring</span>
-      </div>
+      <div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Policy research</span><span class="tag">Workflow automation</span><span class="tag">Mentoring</span></div>
     </div>
-
   </div>
-</div>
 </section>
 
-<!-- ACHIEVEMENTS -->
 <section id="achievements">
-<div class="wrap">
-  <div class="section-label">Measurable Outcomes</div>
-  <h2 class="section-title">Impact by Numbers</h2>
-  <div class="section-rule"></div>
-  <div class="achievements-grid">
-
-    <div class="ach-card">
-      <div class="ach-num">40%</div>
-      <div class="ach-desc">Reduction in reporting errors across a 3-state USAID programme through a purpose-built Python data quality and validation framework</div>
-      <div class="ach-source">USAID — LEARN to Read</div>
+  <div class="wrap">
+    <div class="section-eyebrow">Measurable outcomes</div>
+    <h2>Impact by numbers</h2>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="num">40%</div>
+        <div class="desc">Reduction in reporting errors across a three state USAID programme through a purpose built Python data quality and validation framework</div>
+        <div class="src">USAID, LEARN to Read</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">45%</div>
+        <div class="desc">Faster data processing turnaround through automated validation pipelines, enabling more reliable donor reporting cycles</div>
+        <div class="src">USAID, LEARN to Read</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">90%</div>
+        <div class="desc">Reduction in end to end analytical turnaround at NISER through full Python workflow automation across six operational regions</div>
+        <div class="src">NISER, four year tenure</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">35+</div>
+        <div class="desc">Data professionals trained in SQL standards, validation processes and reporting best practice across geographically dispersed teams</div>
+        <div class="src">USAID multi state programme</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">100%</div>
+        <div class="desc">Reporting accuracy maintained throughout an entire tenure of statutory compliance reporting in a regulated UK education institution</div>
+        <div class="src">Windsor Forest Colleges Group</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">100,000+</div>
+        <div class="desc">Beneficiaries reached by a three state education programme, supported by executive dashboards and reporting delivered to international donors</div>
+        <div class="src">USAID, LEARN to Read</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">6</div>
+        <div class="desc">Geopolitical regions covered with quantitative analysis feeding directly into national government policy recommendations</div>
+        <div class="src">NISER, national policy research</div>
+      </div>
     </div>
-
-    <div class="ach-card">
-      <div class="ach-num">45%</div>
-      <div class="ach-desc">Faster data processing turnaround through automated validation pipelines, enabling more reliable donor reporting cycles</div>
-      <div class="ach-source">USAID — LEARN to Read</div>
-    </div>
-
-    <div class="ach-card">
-      <div class="ach-num">90%</div>
-      <div class="ach-desc">Reduction in end-to-end analytical turnaround at NISER through full Python workflow automation across 6 operational regions</div>
-      <div class="ach-source">NISER — 4-Year Tenure</div>
-    </div>
-
-    <div class="ach-card gold-accent">
-      <div class="ach-num">35+</div>
-      <div class="ach-desc">Data professionals trained in SQL standards, validation processes and reporting best practice across geographically dispersed teams</div>
-      <div class="ach-source">USAID Multi-State Programme</div>
-    </div>
-
-    <div class="ach-card gold-accent">
-      <div class="ach-num">100%</div>
-      <div class="ach-desc">Reporting accuracy maintained throughout an entire tenure of statutory compliance reporting in a regulated UK education institution</div>
-      <div class="ach-source">Windsor Forest Colleges Group</div>
-    </div>
-
-    <div class="ach-card gold-accent">
-      <div class="ach-num">6</div>
-      <div class="ach-desc">Geopolitical regions covered with quantitative analysis feeding directly into national government policy recommendations</div>
-      <div class="ach-source">NISER — National Policy Research</div>
-    </div>
-
   </div>
-</div>
 </section>
 
-<!-- CERTIFICATIONS -->
 <section id="certifications">
-<div class="wrap">
-  <div class="section-label">Credentials</div>
-  <h2 class="section-title">Certifications</h2>
-  <div class="section-rule"></div>
-  <div class="certs-grid">
-
-    <div class="cert-card">
-      <div class="cert-issuer">micro1</div>
-      <div class="cert-name">AI Interview — Outstanding Performance</div>
-      <div class="cert-date">May 2026 &nbsp;·&nbsp; Top Performance Band</div>
-      <div class="cert-skills">
-        <span class="cert-skill">AI Tools</span>
-        <span class="cert-skill">Data Analysis</span>
-        <span class="cert-skill">Communication</span>
-      </div>
+  <div class="wrap">
+    <div class="section-eyebrow">Credentials</div>
+    <h2>Certifications</h2>
+    <div class="cert-grid">
+      <div class="cert-card"><div class="org">micro1</div><h3>AI Interview, Outstanding Performance</h3><div class="date">May 2026 · Top performance band</div></div>
+      <div class="cert-card"><div class="org">Cisco Networking Academy</div><h3>Introduction to Cybersecurity</h3><div class="date">May 2025</div></div>
+      <div class="cert-card"><div class="org">Google</div><h3>Foundations of Cybersecurity</h3><div class="date">Sep 2024</div></div>
+      <div class="cert-card"><div class="org">ISC2</div><h3>ISC2 Candidate</h3><div class="date">Oct 2024 · Security fundamentals</div></div>
+      <div class="cert-card"><div class="org">Amazon Web Services</div><h3>AWS Academy Cloud Foundations</h3><div class="date">Jun 2024</div></div>
+      <div class="cert-card"><div class="org">PwC Switzerland via Forage</div><h3>Power BI Job Simulation</h3><div class="date">Apr 2024</div></div>
+      <div class="cert-card"><div class="org">Telstra via Forage</div><h3>Cybersecurity Job Simulation</h3><div class="date">Apr 2024</div></div>
+      <div class="cert-card"><div class="org">Accenture North America via Forage</div><h3>Data Analytics &amp; Visualisation Simulation</h3><div class="date">Apr 2024</div></div>
+      <div class="cert-card"><div class="org">Datacom via Forage</div><h3>Cybersecurity Job Simulation</h3><div class="date">Apr 2024</div></div>
+      <div class="cert-card"><div class="org">Coursera</div><h3>Excel Essentials for Data Analytics</h3><div class="date">Nov 2022</div></div>
+      <div class="cert-card"><div class="org">Coursera</div><h3>Data Science Orientation</h3><div class="date">Nov 2022</div></div>
     </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Cisco Networking Academy</div>
-      <div class="cert-name">Introduction to Cybersecurity</div>
-      <div class="cert-date">May 2025</div>
-      <div class="cert-skills">
-        <span class="cert-skill">NIST CSF</span>
-        <span class="cert-skill">Threat Detection</span>
-        <span class="cert-skill">Risk Management</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Google</div>
-      <div class="cert-name">Foundations of Cybersecurity</div>
-      <div class="cert-date">Sep 2024 &nbsp;·&nbsp; ID: 8XL5KJD2YGF0</div>
-      <div class="cert-skills">
-        <span class="cert-skill">InfoSec</span>
-        <span class="cert-skill">Ethics</span>
-        <span class="cert-skill">NIST CSF</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">ISC2</div>
-      <div class="cert-name">ISC2 Candidate</div>
-      <div class="cert-date">Oct 2024 &nbsp;·&nbsp; Security Fundamentals</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Security Fundamentals</span>
-        <span class="cert-skill">Professional Membership</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Amazon Web Services</div>
-      <div class="cert-name">AWS Academy Cloud Foundations</div>
-      <div class="cert-date">Jun 2024</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Cloud Security</span>
-        <span class="cert-skill">AWS Core Services</span>
-        <span class="cert-skill">Architecture</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">PwC Switzerland via Forage</div>
-      <div class="cert-name">Power BI Job Simulation</div>
-      <div class="cert-date">Apr 2024 &nbsp;·&nbsp; ID: dsRdbuDFSWAa4Hm2X</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Power BI</span>
-        <span class="cert-skill">KPI Definition</span>
-        <span class="cert-skill">DAX</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Telstra via Forage</div>
-      <div class="cert-name">Cybersecurity Job Simulation</div>
-      <div class="cert-date">Apr 2024 &nbsp;·&nbsp; ID: xtJqwdWhw39CTb49f</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Cybersecurity</span>
-        <span class="cert-skill">Risk Management</span>
-        <span class="cert-skill">Data Analysis</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Accenture North America via Forage</div>
-      <div class="cert-name">Data Analytics &amp; Visualisation Simulation</div>
-      <div class="cert-date">Apr 2024 &nbsp;·&nbsp; ID: uAoLhqtGYbWFC89Ff</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Data Analysis</span>
-        <span class="cert-skill">Visualisation</span>
-        <span class="cert-skill">Presentation</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Datacom via Forage</div>
-      <div class="cert-name">Cybersecurity Job Simulation</div>
-      <div class="cert-date">Apr 2024 &nbsp;·&nbsp; ID: KdC25SFRe5bqTNBc8</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Analytical Skills</span>
-        <span class="cert-skill">Research</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Coursera</div>
-      <div class="cert-name">Excel Essentials for Data Analytics</div>
-      <div class="cert-date">Nov 2022</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Data Management</span>
-        <span class="cert-skill">Database Admin</span>
-        <span class="cert-skill">Quantitative Research</span>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-issuer">Coursera</div>
-      <div class="cert-name">Data Science Orientation</div>
-      <div class="cert-date">Nov 2022</div>
-      <div class="cert-skills">
-        <span class="cert-skill">Data Systems</span>
-        <span class="cert-skill">Statistical Software</span>
-        <span class="cert-skill">Information Literacy</span>
-      </div>
-    </div>
-
   </div>
-</div>
 </section>
 
-<!-- EDUCATION -->
-<section id="education" style="background: var(--surface);">
-<div class="wrap">
-  <div class="section-label">Academic Background</div>
-  <h2 class="section-title">Education</h2>
-  <div class="section-rule"></div>
-  <div class="edu-grid">
+<section id="education">
+  <div class="wrap">
+    <div class="section-eyebrow">Academic background</div>
+    <h2>Education</h2>
 
-    <div class="edu-card">
-      <div class="edu-degree">MSc Cybersecurity</div>
-      <div class="edu-grade">Distinction</div>
-      <div class="edu-uni">Buckinghamshire New University, UK</div>
-      <div class="edu-year">2024 — 2025</div>
-      <div class="edu-modules">GDPR · ISO 27001 · Data Protection · Risk Management · Network Security · Digital Forensics · Cybersecurity Awareness</div>
+    <div class="edu-item">
+      <h3>MSc Cybersecurity <span class="badge">Distinction</span></h3>
+      <div class="org">Buckinghamshire New University, UK · 2024 — 2025</div>
+      <div class="modules">GDPR · ISO 27001 · Data protection · Risk management · Network security · Digital forensics · Cybersecurity awareness</div>
     </div>
 
-    <div class="edu-card">
-      <div class="edu-degree">MSc Information Science</div>
-      <div class="edu-grade gold">Distinction</div>
-      <div class="edu-uni">University of Ibadan, Nigeria</div>
-      <div class="edu-year">2015 — 2017</div>
-      <div class="edu-modules">Data Systems · Research Methods · Knowledge Management · Information Retrieval</div>
+    <div class="edu-item">
+      <h3>MSc Information Science <span class="badge">Distinction</span></h3>
+      <div class="org">University of Ibadan, Nigeria · 2015 — 2017</div>
+      <div class="modules">Data systems · Research methods · Knowledge management · Information retrieval</div>
     </div>
 
-    <div class="edu-card">
-      <div class="edu-degree">BTech Computer Science</div>
-      <div class="edu-grade gold">Second Class Division</div>
-      <div class="edu-uni">Ladoke Akintola University of Technology</div>
-      <div class="edu-year">2004 — 2010</div>
-      <div class="edu-modules">Computer Science foundations · Software Engineering · Database Systems · Programming</div>
+    <div class="edu-item">
+      <h3>BTech Computer Science <span class="badge">Second Class Division</span></h3>
+      <div class="org">Ladoke Akintola University of Technology · 2004 — 2010</div>
+      <div class="modules">Computer science foundations · Software engineering · Database systems · Programming</div>
     </div>
-
   </div>
-</div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-<div class="wrap">
-  <div class="contact-inner">
-    <div class="section-label" style="text-align:center; margin-bottom:20px;">Let's Connect</div>
-    <h2 class="section-title" style="text-align:center;">Open to the Right Opportunity</h2>
-    <div class="section-rule"></div>
-    <p class="contact-quote">"I build the data infrastructure that makes every downstream decision trustworthy."</p>
-    <div class="contact-links">
-      <a href="mailto:bello.oladayo2011@yahoo.com" class="contact-link">
-        <span class="dot"></span>
-        bello.oladayo2011@yahoo.com
-      </a>
-      <a href="tel:+447979619740" class="contact-link">
-        <span class="dot"></span>
-        +44 7979 619740
-      </a>
-      <a href="https://www.linkedin.com/in/oladayo-bello" target="_blank" class="contact-link">
-        <span class="dot"></span>
-        linkedin.com/in/oladayo-bello
-      </a>
+<footer id="contact">
+  <div class="wrap">
+    <h2>Open to the right opportunity</h2>
+    <p class="quote">"I build the data infrastructure that makes every downstream decision trustworthy."</p>
+    <div class="contact-row">
+      <a href="mailto:bello.oladayo2011@yahoo.com">bello.oladayo2011@yahoo.com</a>
+      <a href="tel:+447979618740">+44 7979 618740</a>
+      <a href="https://www.linkedin.com/in/oladayo-bello" target="_blank" rel="noopener">linkedin.com/in/oladayo-bello</a>
     </div>
-    <div class="availability">Available Immediately &nbsp;·&nbsp; Dartford, London Area</div>
+    <p class="fine">Oladayo Bello · Data Analyst · Dartford, London · Right to Work in UK confirmed</p>
   </div>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span>Oladayo Bello &nbsp;·&nbsp; Senior Data Analyst</span>
-  <span>Dartford, London &nbsp;·&nbsp; Right to Work in UK confirmed</span>
 </footer>
-
-<script>
-// Animate stat counters on load
-function animateCounters() {
-  document.querySelectorAll('[data-target]').forEach(el => {
-    const target = parseInt(el.dataset.target);
-    let current = 0;
-    const step = Math.max(1, Math.floor(target / 40));
-    const timer = setInterval(() => {
-      current = Math.min(current + step, target);
-      el.textContent = current;
-      if (current >= target) {
-        el.textContent = target;
-        clearInterval(timer);
-      }
-    }, 30);
-  });
-}
-setTimeout(animateCounters, 600);
-
-// Intersection observer for experience items
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 120);
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.exp-item').forEach(el => observer.observe(el));
-</script>
-
-<!-- ============================================================
-     OLADAYO'S PORTFOLIO ASSISTANT — DROP-IN WIDGET
-     Paste this entire block just before the closing </body> tag
-     of your existing index.html. All styles are scoped under
-     .oda- classes so they will not affect the rest of your page.
-     ============================================================ -->
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  .oda-launcher{
-    position:fixed;bottom:22px;right:22px;z-index:9999;
-    width:58px;height:58px;border-radius:50%;
-    background:#101B2D;color:#fff;border:none;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 10px 30px -8px rgba(16,27,45,.5);
-    font-family:'IBM Plex Mono',monospace;font-size:20px;
-    transition:transform .15s ease;
-  }
-  .oda-launcher:hover{transform:scale(1.06);}
-  .oda-launcher .oda-dot{
-    position:absolute;top:4px;right:4px;width:10px;height:10px;border-radius:50%;
-    background:#2FBF71;border:2px solid #101B2D;
-  }
-  .oda-panel{
-    position:fixed;bottom:92px;right:22px;z-index:9999;
-    width:360px;max-width:calc(100vw - 32px);height:520px;max-height:70vh;
-    background:#fff;border-radius:16px;overflow:hidden;
-    box-shadow:0 24px 60px -16px rgba(16,27,45,.4);
-    display:none;flex-direction:column;
-    font-family:'Inter',sans-serif;color:#1B2433;
-    border:1px solid #DCE3EA;
-  }
-  .oda-panel.oda-open{display:flex;}
-  .oda-head{
-    background:#101B2D;color:#fff;padding:14px 16px;
-    display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
-  }
-  .oda-head-title{font-family:'IBM Plex Mono',monospace;font-size:13px;display:flex;align-items:center;gap:8px;}
-  .oda-head-title .oda-live{width:6px;height:6px;border-radius:50%;background:#2FBF71;}
-  .oda-close{background:none;border:none;color:#8FA6C4;font-size:18px;cursor:pointer;line-height:1;}
-  .oda-close:hover{color:#fff;}
-  .oda-tag{padding:8px 16px;font-size:10.5px;color:#5B6B82;background:#F4F6F8;border-bottom:1px solid #DCE3EA;flex-shrink:0;}
-  .oda-chips{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid #DCE3EA;flex-shrink:0;}
-  .oda-chip{
-    font-family:'IBM Plex Mono',monospace;font-size:11px;color:#101B2D;
-    background:#F4F6F8;border:1px solid #DCE3EA;border-radius:16px;
-    padding:5px 10px;cursor:pointer;white-space:nowrap;
-  }
-  .oda-chip:hover{border-color:#2FBF71;color:#0E8A50;}
-  .oda-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
-  .oda-msg{max-width:86%;font-size:13.5px;line-height:1.5;}
-  .oda-msg.oda-user{align-self:flex-end;background:#101B2D;color:#fff;padding:9px 12px;border-radius:10px 10px 2px 10px;}
-  .oda-msg.oda-bot .oda-bubble{background:#F4F6F8;border:1px solid #DCE3EA;padding:10px 12px;border-radius:2px 10px 10px 10px;}
-  .oda-msg.oda-bot .oda-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#5B6B82;display:block;margin-bottom:4px;}
-  .oda-msg.oda-bot.oda-gate .oda-bubble{border-color:#E8A33D;background:#FFF8EC;}
-  .oda-card{margin-top:8px;border:1px solid #DCE3EA;border-radius:8px;padding:10px 12px;font-size:12px;background:#fff;}
-  .oda-card a{color:#101B2D;font-weight:600;text-decoration:none;}
-  .oda-card .oda-row{color:#5B6B82;margin-top:3px;}
-  .oda-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid #DCE3EA;flex-shrink:0;}
-  .oda-input{flex:1;border:1px solid #DCE3EA;border-radius:8px;padding:9px 11px;font-size:13.5px;font-family:'Inter',sans-serif;outline:none;}
-  .oda-input:focus{border-color:#101B2D;}
-  .oda-send{background:#101B2D;color:#fff;border:none;border-radius:8px;padding:0 14px;font-weight:600;font-size:13px;cursor:pointer;}
-  .oda-send:hover{background:#0B1626;}
-  @media (max-width:480px){
-    .oda-panel{right:16px;left:16px;width:auto;}
-  }
-</style>
-
-<button class="oda-launcher" id="odaLauncher" aria-label="Ask Oladayo's assistant">
-  <span>💬</span><span class="oda-dot"></span>
-</button>
-
-<div class="oda-panel" id="odaPanel">
-  <div class="oda-head">
-    <div class="oda-head-title"><span class="oda-live"></span>ask-oladayo</div>
-    <button class="oda-close" id="odaClose" aria-label="Close">✕</button>
-  </div>
-  <div class="oda-tag">professional queries answered directly · personal data routed to Oladayo</div>
-  <div class="oda-chips" id="odaChips"></div>
-  <div class="oda-log" id="odaLog"></div>
-  <div class="oda-input-row">
-    <input class="oda-input" id="odaQ" type="text" placeholder="Ask a question..." autocomplete="off">
-    <button class="oda-send" id="odaSend">Send</button>
-  </div>
-</div>
-
-<script>
-(function(){
-  var KB = [
-    { kw: ["sponsor","sponsorship","visa","right to work","work permit"],
-      a: "Yes — I'll require Skilled Worker visa sponsorship. My Graduate visa runs to April 2027, so timing works well for a Certificate of Sponsorship within that window." },
-    { kw: ["notice","available","start date","when can you start"],
-      a: "I'm currently working, so notice period depends on the specific role — happy to confirm exact timing once we're discussing a live opportunity." },
-    { kw: ["salary","pay","rate","compensation","package","expect"],
-      a: "My expectations align with UK market rate for a Senior Data/BI Analyst and the relevant Skilled Worker going rate. Happy to discuss specifics directly." },
-    { kw: ["sql"], a: "Advanced, production tested — SQL Server and MySQL, used daily for reporting, validation and analytical modelling." },
-    { kw: ["python"], a: "Advanced working knowledge — Pandas and NumPy for cleaning, transformation and automation." },
-    { kw: ["power bi","powerbi","dax"], a: "Advanced, production tested — dashboard design, data modelling and DAX for KPI and performance reporting." },
-    { kw: ["tableau"], a: "Advanced — used for visualisation and stakeholder facing dashboards." },
-    { kw: ["excel"], a: "Advanced — Power Query, Power Pivot, complex formulas, used throughout my career." },
-    { kw: ["azure","aws","cloud","synapse","fabric","snowflake"],
-      a: "I've studied Azure Data Factory and AWS with some hands on exposure, though I'd call this developing rather than advanced — happy to be transparent about where I am on cloud tooling." },
-    { kw: ["experience","background","career","history","worked"],
-      a: "Ten years across data analytics and BI: Senior Data Analyst at NISER, Data Manager on a USAID programme, Exams Administrator at Windsor Forest Colleges Group, and currently Subject Matter Expert Consultant at Gateway Qualifications." },
-    { kw: ["education","degree","qualification","masters","msc","btech","university"],
-      a: "MSc Cybersecurity (Distinction, Buckinghamshire New University), MSc Information Science (Distinction, University of Ibadan), and a BTech in Computer Science (Second Class Division, LAUTECH)." },
-    { kw: ["location","based","live","relocate","dartford"],
-      a: "Based in Dartford, Kent, UK. Open to relocating anywhere in the UK for the right role." },
-    { kw: ["cv","resume","portfolio","github","work samples"],
-      a: "You're already on it — this page is my portfolio. My CV is available on request via email." },
-    { kw: ["contact","email","phone","reach","call","linkedin"],
-      a: "Best reached by email at bello.oladayo2011@yahoo.com or phone at 07979 618740. LinkedIn is linkedin.com/in/oladayo-bello." },
-    { kw: ["why looking","leaving","current role","reason"],
-      a: "I'm looking for a permanent, sponsorship backed role where I can apply BI and data analytics at a larger scale — happy to talk through this directly." },
-    { kw: ["goal","aspiration","ambition","future plan","long term","career plan","aim to","where do you see"],
-      a: "My goal is to grow into a senior data and BI leadership role in the UK, building governed, decision ready reporting that changes how an organisation operates, and to build a long term career here on a permanent, sponsorship backed basis." }
-  ];
-
-  var SENSITIVE_TOPICS = [
-    { label: "date of birth", kw: ["date of birth","dob","birthday","how old","your age","born on"] },
-    { label: "place of birth", kw: ["place of birth","where were you born","birthplace","hometown"] },
-    { label: "family members", kw: ["wife","spouse","married","husband","children","kids","son","daughter","family member","parents","siblings"] },
-    { label: "home address", kw: ["home address","where do you live exactly","postcode","house number","street address"] }
-  ];
-  var EMPLOYER_SIGNAL = ["hire","hiring","recruit","recruiter","employer","job offer","role for you","position","opportunity","considering you","interview","vacancy","sponsor you"];
-  var FALLBACK = "I don't have a confident answer to that — rather than guess, let me connect you with Oladayo directly.";
-
-  function scoreMatch(text){
-    var t = text.toLowerCase(), best=null, bestScore=0;
-    KB.forEach(function(e){
-      var s=0; e.kw.forEach(function(k){ if(t.indexOf(k)!==-1) s+=k.split(' ').length; });
-      if(s>bestScore){bestScore=s;best=e;}
-    });
-    return bestScore>0?best:null;
-  }
-  function matchSensitive(text){
-    var t=text.toLowerCase(), found=null;
-    SENSITIVE_TOPICS.forEach(function(topic){
-      topic.kw.forEach(function(k){ if(t.indexOf(k)!==-1) found=topic; });
-    });
-    return found;
-  }
-  function isEmployerIntent(text){
-    var t=text.toLowerCase();
-    return EMPLOYER_SIGNAL.some(function(k){ return t.indexOf(k)!==-1; });
-  }
-
-  var log = document.getElementById('odaLog');
-  var input = document.getElementById('odaQ');
-  var pendingSensitive = null;
-  var contactCardHTML = 'Reach Oladayo directly:' +
-    '<div class="oda-row">📧 <a href="mailto:bello.oladayo2011@yahoo.com">bello.oladayo2011@yahoo.com</a></div>' +
-    '<div class="oda-row">📞 <a href="tel:+447979618740">07979 618740</a></div>' +
-    '<div class="oda-row">💼 <a href="https://www.linkedin.com/in/oladayo-bello" target="_blank">linkedin.com/in/oladayo-bello</a></div>';
-
-  function addUser(text){
-    var d=document.createElement('div'); d.className='oda-msg oda-user'; d.textContent=text;
-    log.appendChild(d); log.scrollTop=log.scrollHeight;
-  }
-  function addBot(text, opts){
-    opts = opts || {};
-    var d=document.createElement('div'); d.className='oda-msg oda-bot'+(opts.gate?' oda-gate':'');
-    var label=document.createElement('span'); label.className='oda-label';
-    label.textContent = opts.gate ? (opts.labelText||'PERSONAL DATA REQUEST') : (opts.labelText||'FROM KNOWLEDGE BASE');
-    var bubble=document.createElement('div'); bubble.className='oda-bubble'; bubble.textContent=text;
-    d.appendChild(label); d.appendChild(bubble);
-    if(opts.card){
-      var card=document.createElement('div'); card.className='oda-card'; card.innerHTML=contactCardHTML;
-      d.appendChild(card);
-    }
-    log.appendChild(d); log.scrollTop=log.scrollHeight;
-  }
-
-  function handleQuery(text){
-    if(!text.trim()) return;
-    addUser(text);
-
-    if(pendingSensitive){
-      var employer = isEmployerIntent(text);
-      pendingSensitive = null;
-      setTimeout(function(){
-        addBot(
-          employer
-            ? "Thank you — as this relates to a hiring decision, I've noted it as a priority. Oladayo reviews these personally and will follow up with you directly."
-            : "Thank you for explaining. Personal details of this kind are only shared by Oladayo directly, so please reach out below and he will follow up personally.",
-          { gate:true, labelText: employer?'PRIORITY — EMPLOYER ENQUIRY':'FORWARDED FOR REVIEW', card:true }
-        );
-      }, 350);
-      return;
-    }
-
-    var sensitive = matchSensitive(text);
-    if(sensitive){
-      pendingSensitive = sensitive;
-      setTimeout(function(){
-        addBot("That touches on "+sensitive.label+", which I treat as personal data. Could you tell me who is asking, which organisation you represent, and the purpose of your enquiry? I'll pass it to Oladayo directly.", {gate:true});
-      }, 250);
-      return;
-    }
-
-    var match = scoreMatch(text);
-    setTimeout(function(){
-      if(match){ addBot(match.a); }
-      else{ addBot(FALLBACK, {labelText:'NOT CONFIDENT — ESCALATING', gate:true, card:true}); }
-    }, 250);
-  }
-
-  document.getElementById('odaSend').addEventListener('click', function(){
-    handleQuery(input.value); input.value='';
-  });
-  input.addEventListener('keydown', function(e){
-    if(e.key==='Enter'){ handleQuery(input.value); input.value=''; }
-  });
-
-  var suggestions = ["Do you need visa sponsorship?","What's your Power BI experience?","Where are you based?","What are your career goals?"];
-  var chipsWrap = document.getElementById('odaChips');
-  suggestions.forEach(function(s){
-    var c=document.createElement('div'); c.className='oda-chip'; c.textContent=s;
-    c.addEventListener('click', function(){ handleQuery(s); });
-    chipsWrap.appendChild(c);
-  });
-
-  var launcher = document.getElementById('odaLauncher');
-  var panel = document.getElementById('odaPanel');
-  var closeBtn = document.getElementById('odaClose');
-  var greeted = false;
-  launcher.addEventListener('click', function(){
-    panel.classList.toggle('oda-open');
-    if(!greeted && panel.classList.contains('oda-open')){
-      greeted = true;
-      addBot("Good day, thank you for stopping by. I can speak to Oladayo's experience, skills, visa status and goals directly. Questions about personal matters are routed to him under his data protection policy, with priority given to genuine employer enquiries.");
-    }
-  });
-  closeBtn.addEventListener('click', function(){ panel.classList.remove('oda-open'); });
-})();
-</script>
-<!-- ============================================================
-     END OF DROP-IN WIDGET
-     ============================================================ -->
-    
 
 </body>
 </html>
-
