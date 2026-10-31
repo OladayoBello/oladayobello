@@ -2,486 +2,999 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oladayo Bello — Data Analyst</title>
-<meta name="description" content="Oladayo Bello, Data Analyst and Data Manager specialising in SQL, Python, Power BI and Tableau.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Oladayo Bello Portfolio</title>
+<meta name="description" content="Oladayo Bello, Database Administration and Data Management Analyst. SQL Server, Python, Power BI, data quality and governance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-  :root{
-    --navy:#0D2B4E;
-    --navy-dark:#08192F;
-    --green:#1D9E75;
-    --green-dark:#0F6E56;
-    --bg:#F7F8FA;
-    --card:#FFFFFF;
-    --text:#1D2228;
-    --muted:#5C6470;
-    --border:#E3E7EC;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.6;
-  }
-  a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
-  header{
-    position:sticky;top:0;z-index:20;
-    background:var(--navy);
-    color:#fff;
-  }
-  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
-  .logo{font-weight:700;letter-spacing:0.5px;}
-  nav ul{list-style:none;display:flex;gap:24px;}
-  nav a{font-size:14px;color:#CBD5E1;transition:color .2s;}
-  nav a:hover{color:var(--green);}
+/* Layout: light, airy "data studio" identity. White and pale sky surfaces, a dark SQL console as the
+   one deep element, colour coded accents (cyan data, violet analytics, pink governance, amber results).
+   Manrope headings for a crisp corporate voice, Plus Jakarta Sans for body text, JetBrains Mono for code. */
+:root{
+  --ink:#0F1B33; --bg:#F7F9FD; --panel:#FFFFFF; --panel2:#EEF3FB; --line:#DCE4F0;
+  --fg:#0F1B33; --muted:#4D5B75; --dim:#7A879E;
+  --cyan:#0891B2; --cyan2:#0E7490; --amber:#D97706; --mint:#059669; --rose:#E11D48;
+  --violet:#7C3AED; --pink:#DB2777; --teal:#0D9488;
+  --glow:rgba(8,145,178,.12);
+  --display:"Manrope",ui-sans-serif,system-ui,"Segoe UI",Arial,sans-serif;
+  --body:"Plus Jakarta Sans",ui-sans-serif,system-ui,"Segoe UI",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --ink:#070D1A; --bg:#0B1324; --panel:#111C33; --panel2:#16233F; --line:#22314F;
+  --fg:#E6EDF7; --muted:#93A3BE; --dim:#64748F;
+  --cyan:#3DD5F3; --cyan2:#1BA6C9; --amber:#F7B538; --mint:#4ADE9B; --rose:#F47A8A;
+  --violet:#A78BFA; --pink:#F472B6; --teal:#2DD4BF;
+  --glow:rgba(61,213,243,.18); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#070D1A}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
 
-  .hero{
-    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-dark) 100%);
-    color:#fff;
-    padding:72px 0 56px;
-  }
-  .eyebrow{
-    display:inline-block;
-    font-size:13px;
-    color:var(--green);
-    background:rgba(29,158,117,0.15);
-    border:1px solid rgba(29,158,117,0.4);
-    padding:4px 12px;
-    border-radius:20px;
-    margin-bottom:20px;
-  }
-  h1{font-size:40px;font-weight:700;margin-bottom:8px;}
-  .role{font-size:20px;color:#9FE1CB;font-weight:500;margin-bottom:20px;}
-  .lede{max-width:680px;color:#CBD5E1;font-size:16px;margin-bottom:28px;}
-  .cta-row{display:flex;gap:12px;flex-wrap:wrap;}
-  .btn{
-    display:inline-block;
-    padding:11px 22px;
-    border-radius:6px;
-    font-size:14px;
-    font-weight:600;
-  }
-  .btn-primary{background:var(--green);color:#fff;}
-  .btn-primary:hover{background:var(--green-dark);}
-  .btn-ghost{border:1px solid #4B6280;color:#fff;}
-  .btn-ghost:hover{border-color:var(--green);}
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(7,13,26,.86);backdrop-filter:blur(10px);border-bottom:1px solid #1B2741;color:#E6EDF7}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font:600 15px var(--display)}
+.brand .mk{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,#3DD5F3,#1BA6C9);color:#04101F;font:800 14px var(--display)}
+nav ul{list-style:none;display:flex;gap:4px;margin:0;padding:0}
+nav a{font:500 13.5px var(--body);color:#A3B2CB;padding:7px 11px;border-radius:7px;transition:.2s}
+nav a:hover,nav a.active{color:#fff;background:#16233F}
+nav a.active{box-shadow:inset 0 -2px 0 #3DD5F3}
+.hdr-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{width:36px;height:36px;border-radius:9px;border:1px solid #22314F;background:#111C33;color:#E6EDF7;display:grid;place-items:center;cursor:pointer}
+.icon-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.menu-btn{display:none}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,#3DD5F3,#F7B538)}
 
-  .metrics{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:16px;
-    margin-top:48px;
-  }
-  .metric{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:10px;
-    padding:18px 12px;
-    text-align:center;
-  }
-  .metric .num{font-size:26px;font-weight:700;color:var(--green);}
-  .metric .label{font-size:12px;color:#9AAAC0;margin-top:4px;line-height:1.4;}
+/* hero */
+.hero{background:#070D1A;color:var(--fg);position:relative;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.hero .wrap{position:relative;padding-block:64px 56px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:center}
+.who{display:flex;align-items:center;gap:18px;margin-bottom:22px}
+.avatar{position:relative;width:104px;height:104px;flex:none}
+.avatar img{width:104px;height:104px;border-radius:50%;object-fit:cover;display:block;border:3px solid #070D1A;position:relative;z-index:1}
+.avatar::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#3DD5F3,#F7B538,#4ADE9B,#3DD5F3);animation:spin 8s linear infinite}
+.avatar .live{position:absolute;right:4px;bottom:6px;z-index:2;width:16px;height:16px;border-radius:50%;background:#4ADE9B;border:3px solid #070D1A}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status{display:inline-flex;align-items:center;gap:8px;font:500 12.5px var(--mono);color:#F7B538;border:1px solid rgba(247,181,56,.4);background:rgba(247,181,56,.08);padding:5px 11px;border-radius:999px}
+.status i{width:7px;height:7px;border-radius:50%;background:#F7B538;box-shadow:0 0 0 0 rgba(247,181,56,.6);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 8px rgba(247,181,56,0)}100%{box-shadow:0 0 0 0 rgba(247,181,56,0)}}
+.hero h1{font-size:clamp(38px,6vw,60px);font-weight:800;letter-spacing:-1.5px;margin-top:10px}
+.hero h1 span{background:linear-gradient(90deg,#3DD5F3,#7FE7FB);-webkit-background-clip:text;background-clip:text;color:transparent}
+.typed{font:500 clamp(16px,2.2vw,20px) var(--mono);color:#F7B538;min-height:1.6em;margin:12px 0 18px}
+.typed::before{content:"> ";color:#71819C}
+.typed b{display:inline-block;width:2px;height:1.05em;background:#F7B538;vertical-align:-2px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lede{color:var(--muted);max-width:60ch;font-size:16.5px}
+.lede strong{color:var(--fg);font-weight:600}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;font:600 14px var(--body);cursor:pointer;border:1px solid transparent;transition:.2s}
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-primary{background:#3DD5F3;color:#04101F}
+.btn-primary:hover{background:#7FE7FB;transform:translateY(-1px)}
+.btn-ghost{border-color:#2B3C5E;color:#E6EDF7;background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:#3DD5F3}
 
-  section{padding:56px 0;}
-  .section-eyebrow{font-size:13px;color:var(--green-dark);font-weight:700;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
-  h2{font-size:26px;font-weight:700;margin-bottom:28px;}
+/* console card */
+.console{background:#0C1528;border:1px solid #22314F;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(61,213,243,.06);overflow:hidden;min-width:0}
+.console .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid #1B2741;background:#0F1A31}
+.console .bar i{width:10px;height:10px;border-radius:50%;background:#2B3C5E}
+.console .bar i:nth-child(1){background:#F47A8A}.console .bar i:nth-child(2){background:#F7B538}.console .bar i:nth-child(3){background:#4ADE9B}
+.console .bar span{margin-left:8px;font:500 12px var(--mono);color:#71819C}
+.console pre{margin:0;padding:16px 18px 6px;font:13px/1.7 var(--mono);color:#C9D6EA;white-space:pre-wrap;word-break:break-word}
+.k{color:#3DD5F3}.s{color:#F7B538}.c{color:#71819C}.n{color:#4ADE9B}
+.rs{padding:4px 18px 16px;overflow-x:auto}
+.rs table{width:100%;border-collapse:collapse;font:12.5px var(--mono);color:#C9D6EA;font-variant-numeric:tabular-nums}
+.rs th{text-align:left;color:#71819C;font-weight:500;border-bottom:1px solid #22314F;padding:6px 6px}
+.rs td{padding:6px 6px;border-bottom:1px dashed #1B2741;white-space:nowrap}
+.rs tr.hl td{color:#F7B538}
+.rs .foot{font:12px var(--mono);color:#4ADE9B;margin-top:8px}
 
-  .skills-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-  }
-  .skill-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:18px;
-  }
-  .skill-card .icon{
-    width:32px;height:32px;border-radius:8px;
-    background:rgba(29,158,117,0.12);
-    color:var(--green-dark);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;margin-bottom:10px;
-  }
-  .skill-card h3{font-size:15px;margin-bottom:6px;}
-  .skill-card p{font-size:13px;color:var(--muted);}
+/* kpi strip */
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:48px}
+.kpi{border:1px solid #1E2C49;background:rgba(17,28,51,.7);border-radius:12px;padding:16px 14px}
+.kpi .v{font:700 28px var(--display);color:#3DD5F3;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12.5px;color:#A3B2CB;line-height:1.4;margin-top:2px}
 
-  .exp-item{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:24px;
-    margin-bottom:16px;
-  }
-  .exp-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
-  .exp-title{font-size:17px;font-weight:700;}
-  .exp-org{font-size:14px;color:var(--green-dark);font-weight:600;}
-  .exp-dates{font-size:13px;color:var(--muted);white-space:nowrap;}
-  .exp-item ul{margin:12px 0 12px 18px;}
-  .exp-item li{font-size:14px;color:var(--text);margin-bottom:6px;}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-  .tag{
-    font-size:11px;
-    background:var(--bg);
-    border:1px solid var(--border);
-    color:var(--muted);
-    padding:3px 9px;
-    border-radius:20px;
-  }
+/* sections */
+section.band{padding-block:84px}
+section.alt{background:var(--panel2)}
+.eyebrow{font:600 12px var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--cyan)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.sec-head h2{font-size:clamp(28px,3.6vw,38px);font-weight:700;letter-spacing:-.6px;margin-top:10px}
+.sec-head p{color:var(--muted);max-width:52ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px}
 
-  .impact-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-  }
-  .impact-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:20px;
-  }
-  .impact-card .num{font-size:30px;font-weight:700;color:var(--navy);}
-  .impact-card .desc{font-size:13px;color:var(--muted);margin:8px 0;}
-  .impact-card .src{font-size:11px;color:var(--green-dark);font-weight:600;text-transform:uppercase;}
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;position:relative}
+.stage{position:relative;background:none;border:0;color:var(--fg);text-align:left;padding:0 10px 0 0;cursor:pointer;font:inherit}
+.stage .node{display:flex;align-items:center;gap:0}
+.stage .dot{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line);background:var(--panel);color:var(--muted);font:600 13px var(--mono);transition:.25s;flex:none}
+.stage .wire{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 10px);position:relative;overflow:hidden}
+.stage .wire::after{content:"";position:absolute;top:0;left:-30%;width:30%;height:2px;background:var(--cyan);animation:flow 2.4s linear infinite}
+.stage:last-child .wire{display:none}
+@keyframes flow{to{left:100%}}
+.stage h3{font-size:15px;margin-top:14px}
+.stage p{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
+.stage.on .dot,.stage:hover .dot{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 0 5px var(--glow)}
+.stage.on h3{color:var(--cyan)}
+.stage-detail{margin-top:30px;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px;align-items:start}
+.stage-detail h3{font-size:20px}
+.stage-detail .tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font:500 12.5px var(--mono);padding:4px 10px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);color:var(--fg)}
+.proof{border-left:2px solid var(--amber);padding-left:16px}
+.proof .big{font:700 34px var(--display);color:var(--amber)}
+.proof p{color:var(--muted);font-size:14.5px}
+.proof .src{font:500 12px var(--mono);color:var(--dim);margin-top:8px;text-transform:uppercase;letter-spacing:.8px}
 
-  .cert-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-  }
-  .cert-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:16px 18px;
-  }
-  .cert-card .org{font-size:12px;color:var(--green-dark);font-weight:700;text-transform:uppercase;}
-  .cert-card h3{font-size:14px;margin:4px 0;}
-  .cert-card .date{font-size:12px;color:var(--muted);}
+/* skills */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.filters button{font:500 13px var(--body);padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;transition:.2s}
+.filters button:hover{color:var(--fg)}
+.filters button.on{background:var(--cyan);border-color:var(--cyan);color:#04101F}
+.skill-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.sk{padding:20px;transition:.25s}
+.sk.hide{display:none}
+.sk:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.sk .hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.sk .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--glow);color:var(--cyan);font:600 13px var(--mono);flex:none}
+.sk h3{font-size:16px}
+.sk .cat{font:500 11px var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.8px}
+.sk .tags{display:flex;flex-wrap:wrap;gap:6px}
 
-  .edu-item{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:20px;
-    margin-bottom:14px;
-  }
-  .edu-item h3{font-size:16px;}
-  .edu-item .badge{
-    display:inline-block;
-    font-size:11px;
-    background:rgba(29,158,117,0.12);
-    color:var(--green-dark);
-    padding:2px 9px;
-    border-radius:20px;
-    margin-left:8px;
-  }
-  .edu-item .org{font-size:14px;color:var(--muted);margin-top:2px;}
-  .edu-item .modules{font-size:13px;color:var(--muted);margin-top:8px;}
+/* timeline gantt */
+.gantt{padding:22px 22px 14px;overflow-x:auto}
+.gantt svg{display:block;width:100%;height:auto}
+.gantt text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.gantt .lbl{font-family:var(--body);font-size:12.5px;fill:var(--fg);font-weight:500}
+.gantt .grid{stroke:var(--line);stroke-width:1}
+.gantt .bar{cursor:pointer;transition:opacity .2s}
+.gantt .bar:hover{opacity:.8}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font:500 12.5px var(--mono);color:var(--muted);padding:6px 22px 18px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.tip{position:fixed;z-index:80;pointer-events:none;background:#0C1528;color:#E6EDF7;border:1px solid #2B3C5E;border-radius:10px;padding:10px 12px;font:13px/1.5 var(--body);max-width:280px;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.tip b{display:block;font-family:var(--display);font-size:13.5px}
+.tip span{font:12px var(--mono);color:#F7B538}
 
-  footer{
-    background:var(--navy-dark);
-    color:#CBD5E1;
-    padding:48px 0;
-    text-align:center;
-  }
-  footer h2{color:#fff;font-size:22px;margin-bottom:12px;}
-  footer .quote{font-style:italic;color:#9AAAC0;max-width:520px;margin:0 auto 20px;}
-  footer .contact-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:14px;margin-bottom:16px;}
-  footer .fine{font-size:12px;color:#6B7C93;}
+/* experience */
+.xp{display:grid;gap:12px;margin-top:28px}
+details.job{padding:0;overflow:hidden}
+details.job summary{list-style:none;cursor:pointer;padding:20px 22px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center}
+details.job summary::-webkit-details-marker{display:none}
+.job .logo{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font:700 13px var(--mono);background:var(--panel2);border:1px solid var(--line);color:var(--cyan)}
+.job .t{font:600 16.5px var(--display)}
+.job .o{font-size:14px;color:var(--muted)}
+.job .d{font:500 12.5px var(--mono);color:var(--dim);text-align:right;white-space:nowrap}
+.job .d em{display:block;font-style:normal;color:var(--amber)}
+.job .chev{display:inline-block;transition:.25s;margin-left:6px}
+details.job[open] .chev{transform:rotate(180deg)}
+details.job[open]{border-color:color-mix(in srgb,var(--cyan) 45%,var(--line))}
+.job .body{padding:0 22px 22px 82px}
+.job ul{margin:0 0 14px;padding-left:18px}
+.job li{margin-bottom:6px;font-size:15px}
+.job li::marker{color:var(--cyan)}
+.job .tags{display:flex;flex-wrap:wrap;gap:6px}
 
-  @media (max-width:860px){
-    .metrics{grid-template-columns:repeat(3,1fr);}
-    .skills-grid{grid-template-columns:repeat(2,1fr);}
-    .impact-grid{grid-template-columns:1fr;}
-    .cert-grid{grid-template-columns:1fr;}
-    nav ul{display:none;}
-  }
+/* case study */
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.case .card{padding:24px}
+.funnel{display:grid;gap:10px;margin-top:16px}
+.fl{display:grid;grid-template-columns:minmax(0,1fr) 70px;align-items:center;gap:12px}
+.fl .track{height:36px;border-radius:8px;background:var(--panel2);overflow:hidden;position:relative}
+.fl .fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--cyan2),var(--cyan));display:flex;align-items:center;padding-left:12px;font:500 12.5px var(--body);color:#04101F;white-space:nowrap;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.fl .num{font:700 18px var(--display);text-align:right;font-variant-numeric:tabular-nums}
+.case-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+.cs{background:var(--panel2);border-radius:10px;padding:12px}
+.cs .v{font:700 22px var(--display);color:var(--amber)}
+.cs .l{font-size:12.5px;color:var(--muted);line-height:1.35}
+.steps{display:grid;gap:14px;margin-top:14px}
+.step{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px}
+.step .n{width:30px;height:30px;border-radius:8px;background:var(--glow);color:var(--cyan);display:grid;place-items:center;font:600 13px var(--mono)}
+.step b{font-family:var(--display);font-size:15px}
+.step p{font-size:14px;color:var(--muted)}
+
+/* impact gauges */
+.gauges{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.gauge{padding:22px;text-align:center}
+.gauge svg{width:132px;height:132px;display:block;margin:0 auto 10px}
+.gauge .trk{stroke:var(--panel2)}
+.gauge .val{stroke:var(--cyan);transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)}
+.gauge.amber .val{stroke:var(--amber)}.gauge.mint .val{stroke:var(--mint)}
+.gauge .pct{font:700 26px var(--display);fill:var(--fg)}
+.gauge h3{font-size:15px}
+.gauge p{font-size:13.5px;color:var(--muted);margin-top:4px}
+.gauge .src{font:500 11px var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-top:10px}
+.reach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.reach .card{padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
+.reach .v{font:800 34px var(--display);color:var(--cyan);font-variant-numeric:tabular-nums}
+.reach p{font-size:14px;color:var(--muted)}
+.dots{display:grid;grid-template-columns:repeat(18,1fr);gap:3px;margin-top:10px}
+.dots i{aspect-ratio:1;border-radius:2px;background:var(--panel2)}
+.dots i.on{background:var(--amber)}
+
+/* certs + edu */
+.cert-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cert{padding:16px 18px}
+.cert.hide{display:none}
+.cert .org{font:600 11.5px var(--mono);color:var(--cyan);text-transform:uppercase;letter-spacing:.8px}
+.cert h3{font-size:14.5px;margin:5px 0 4px;font-family:var(--body);font-weight:600}
+.cert .dt{font:12px var(--mono);color:var(--dim)}
+.edu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:40px}
+.edu .card{padding:22px}
+.edu .badge{display:inline-block;font:600 11px var(--mono);padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber);margin-bottom:10px}
+.edu h3{font-size:17px}
+.edu .o{font-size:14px;color:var(--muted);margin-top:4px}
+.edu .m{font:12px var(--mono);color:var(--dim);margin-top:10px;line-height:1.6}
+
+/* contact */
+.contact{background:#070D1A;color:#E6EDF7;position:relative;overflow:hidden}
+.contact .wrap{padding-block:80px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center}
+.contact h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-1px}
+.contact p{color:#A3B2CB;margin-top:12px;max-width:50ch}
+.clist{display:grid;gap:10px}
+.crow{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:14px;align-items:center;background:#0C1528;border:1px solid #22314F;border-radius:12px;padding:12px 14px}
+.crow .ci{width:40px;height:40px;border-radius:10px;background:rgba(61,213,243,.12);color:#3DD5F3;display:grid;place-items:center}
+.crow .ci svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.crow .lab{font:500 11.5px var(--mono);color:#71819C;text-transform:uppercase;letter-spacing:.8px}
+.crow .val{font-size:15px;word-break:break-all}
+.copy{font:500 12.5px var(--mono);color:#3DD5F3;background:none;border:1px solid #2B3C5E;border-radius:8px;padding:6px 10px;cursor:pointer}
+.copy:hover{border-color:#3DD5F3}
+footer.end{background:#070D1A;color:#71819C;border-top:1px solid #1B2741}
+footer.end .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:12.5px var(--mono)}
+
+/* modal, toast, fab */
+.modal{position:fixed;inset:0;z-index:90;background:rgba(4,8,18,.7);display:grid;place-items:center;padding:20px}
+.sheet{background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:16px;padding:24px;width:min(420px,100%);position:relative}
+.sheet h3{font-size:19px}
+.sheet .addr{font:500 14px var(--mono);color:var(--cyan);margin:6px 0 16px;word-break:break-all}
+.opts{display:grid;gap:8px}
+.opts a,.opts button{display:block;width:100%;text-align:left;font:500 14.5px var(--body);padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--fg);cursor:pointer}
+.opts a:hover,.opts button:hover{border-color:var(--cyan)}
+.x{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer;font-size:18px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:#3DD5F3;color:#04101F;font:600 14px var(--body);padding:10px 16px;border-radius:10px;opacity:0;transition:.25s;z-index:95;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:44px;height:44px;border-radius:12px;background:var(--cyan);color:#04101F;display:grid;place-items:center;opacity:0;pointer-events:none;transition:.25s;border:0;cursor:pointer}
+.fab.show{opacity:1;pointer-events:auto}
+.fab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* reveal: visible at rest, gentle lift when scrolled into view */
+.rv{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .rv:not(.in){transform:translateY(14px)}
+
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pipe{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:26px}
+  .stage:nth-child(3) .wire{display:none}
+  .stage-detail,.case,.contact .wrap{grid-template-columns:1fr}
+  .skill-grid,.cert-grid,.edu{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gauges{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .reach{grid-template-columns:1fr}
+  nav{display:none}
+  nav.open{display:block;position:absolute;top:62px;left:0;right:0;background:#070D1A;border-bottom:1px solid #1B2741;padding:10px max(20px,env(safe-area-inset-left,0px)) 16px}
+  nav.open ul{flex-direction:column}
+  .menu-btn{display:grid}
+}
+@media (max-width:600px){
+  .hero .wrap{padding-block:40px 40px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .pipe{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stage:nth-child(3) .wire{display:block}.stage:nth-child(2n) .wire{display:none}
+  .skill-grid,.cert-grid,.edu,.gauges{grid-template-columns:1fr}
+  .case-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  details.job summary{grid-template-columns:auto minmax(0,1fr)}
+  .job .d{grid-column:2;text-align:left}
+  .job .body{padding:0 20px 20px}
+  .who{gap:14px}
+  .avatar,.avatar img{width:84px;height:84px}
+  section.band{padding-block:60px}
+  .crow{grid-template-columns:40px minmax(0,1fr)}
+  .crow .copy{grid-column:2;justify-self:start}
+  .rs th:nth-child(3),.rs td:nth-child(3){display:none}
+  .gantt{padding:16px 12px 8px}
+}
+
+/* ===== lively layer ===== */
+
+/* aurora glow behind the hero */
+.aurora{position:absolute;inset:-20% -10% auto;height:140%;pointer-events:none;filter:blur(70px);opacity:.55}
+.aurora i{position:absolute;border-radius:50%;mix-blend-mode:screen;animation:drift 18s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:520px;height:520px;left:-6%;top:4%;background:radial-gradient(circle,rgba(61,213,243,.55),transparent 65%)}
+.aurora i:nth-child(2){width:460px;height:460px;right:-4%;top:-6%;background:radial-gradient(circle,rgba(167,139,250,.5),transparent 65%);animation-duration:22s}
+.aurora i:nth-child(3){width:420px;height:420px;left:38%;top:42%;background:radial-gradient(circle,rgba(247,181,56,.28),transparent 65%);animation-duration:26s}
+@keyframes drift{to{transform:translate(60px,40px) scale(1.12)}}
+.hero .wrap{z-index:1}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(61,213,243,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(61,213,243,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 75%)}
+
+/* gradient words in headings */
+.grad{background:linear-gradient(90deg,var(--cyan),var(--violet) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 span{background:linear-gradient(90deg,#3DD5F3,#A78BFA 60%,#F472B6);-webkit-background-clip:text;background-clip:text;background-size:200% auto;animation:sheen 6s linear infinite}
+@keyframes sheen{to{background-position:200% center}}
+
+/* console glow and live row */
+.console{position:relative}
+.console::before{content:"";position:absolute;inset:-1px;border-radius:15px;padding:1px;background:linear-gradient(135deg,rgba(61,213,243,.7),rgba(167,139,250,.5),rgba(247,181,56,.5));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.rs tr.hl td{background:rgba(247,181,56,.07);animation:rowpulse 3s ease-in-out infinite}
+@keyframes rowpulse{50%{background:rgba(247,181,56,.16)}}
+
+/* kpi tiles: coloured top edge and glow on hover */
+.kpi{position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+.kpi::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--k,#3DD5F3)}
+.kpi .v{color:var(--k,#3DD5F3)}
+.kpi:hover{transform:translateY(-4px);border-color:var(--k);box-shadow:0 14px 34px -12px var(--k)}
+.kpi:nth-child(1){--k:#3DD5F3}.kpi:nth-child(2){--k:#4ADE9B}.kpi:nth-child(3){--k:#A78BFA}.kpi:nth-child(4){--k:#F7B538}.kpi:nth-child(5){--k:#F472B6}.kpi:nth-child(6){--k:#2DD4BF}
+
+/* tech ticker */
+.ticker{position:relative;z-index:1;border-top:1px solid #1B2741;background:rgba(7,13,26,.6);overflow:hidden;padding-block:14px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ticker .track{display:flex;gap:34px;width:max-content;animation:tick 40s linear infinite;font:500 13.5px var(--mono);color:#A3B2CB;white-space:nowrap}
+.ticker span{display:inline-flex;align-items:center;gap:10px}
+.ticker span::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--c,#3DD5F3);box-shadow:0 0 10px var(--c,#3DD5F3)}
+.ticker:hover .track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* sections get soft colour washes */
+section.band{position:relative;overflow:hidden}
+section.band::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;filter:blur(90px);opacity:.10;pointer-events:none;right:-180px;top:-160px;background:var(--wash,var(--cyan))}
+section.band > .wrap{position:relative}
+#pipeline{--wash:var(--cyan)}#skills{--wash:var(--violet)}#journey{--wash:var(--teal)}#casestudy{--wash:var(--amber)}#impact{--wash:var(--pink)}#credentials{--wash:var(--violet)}
+#journey::before,#impact::before{left:-200px;right:auto}
+
+/* pipeline: each stage its own colour */
+.stage{--s:var(--cyan)}
+.stage:nth-child(2){--s:var(--mint)}.stage:nth-child(3){--s:var(--violet)}.stage:nth-child(4){--s:var(--amber)}.stage:nth-child(5){--s:var(--pink)}.stage:nth-child(6){--s:var(--teal)}
+.stage .wire::after{background:linear-gradient(90deg,transparent,var(--s))}
+.stage.on .dot,.stage:hover .dot{border-color:var(--s);color:var(--s);box-shadow:0 0 0 5px color-mix(in srgb,var(--s) 18%,transparent),0 0 24px color-mix(in srgb,var(--s) 35%,transparent)}
+.stage.on h3{color:var(--s)}
+.stage.on .dot{background:color-mix(in srgb,var(--s) 14%,var(--panel))}
+.stage-detail{position:relative;overflow:hidden;transition:border-color .3s}
+.stage-detail::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--sd,var(--cyan));transition:background .3s}
+.proof{border-left-color:var(--sd,var(--amber))}
+.proof .big{color:var(--sd,var(--amber))}
+#sdStep{color:var(--sd,var(--cyan))}#sdStep::before{background:var(--sd,var(--cyan))}
+
+/* cards: gradient border glow on hover */
+.card{transition:transform .25s,border-color .25s,box-shadow .25s}
+.sk,.cert,.gauge,.reach .card,.edu .card,.case .card{position:relative}
+.sk:hover,.cert:hover,.gauge:hover,.reach .card:hover,.edu .card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c,var(--cyan)) 60%,var(--line));box-shadow:0 18px 40px -18px color-mix(in srgb,var(--c,var(--cyan)) 60%,transparent)}
+
+/* skill categories colour coded */
+.sk[data-cat="db"]{--c:var(--cyan)}.sk[data-cat="an"]{--c:var(--violet)}.sk[data-cat="eng"]{--c:var(--mint)}.sk[data-cat="gov"]{--c:var(--pink)}.sk[data-cat="field"]{--c:var(--amber)}.sk[data-cat="lead"]{--c:var(--teal)}
+.sk .ic{background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c)}
+.sk .cat{color:var(--c)}
+.sk .chip{transition:.2s}
+.sk:hover .chip{border-color:color-mix(in srgb,var(--c) 40%,var(--line))}
+.filters button[data-f="db"]{--c:var(--cyan)}.filters button[data-f="an"]{--c:var(--violet)}.filters button[data-f="eng"]{--c:var(--mint)}.filters button[data-f="gov"]{--c:var(--pink)}.filters button[data-f="field"]{--c:var(--amber)}.filters button[data-f="lead"]{--c:var(--teal)}
+.filters button[data-f="data"]{--c:var(--violet)}.filters button[data-f="cyber"]{--c:var(--pink)}.filters button[data-f="cloud"]{--c:var(--mint)}
+.filters button.on{background:var(--c,var(--cyan));border-color:var(--c,var(--cyan));color:#04101F}
+.filters button:not(.on)::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c,var(--cyan));margin-right:7px;vertical-align:1px}
+.filters button[data-f="all"]::before{display:none}
+
+/* certs colour coded */
+.cert[data-cat="data"]{--c:var(--violet)}.cert[data-cat="cyber"]{--c:var(--pink)}.cert[data-cat="cloud"]{--c:var(--mint)}
+.cert .org{color:var(--c)}
+.cert{border-left:3px solid var(--c)}
+
+/* job logos colourful */
+.job:nth-child(1) .logo{--j:var(--cyan)}.job:nth-child(2) .logo{--j:var(--amber)}.job:nth-child(3) .logo{--j:var(--violet)}.job:nth-child(4) .logo{--j:var(--mint)}.job:nth-child(5) .logo{--j:var(--pink)}.job:nth-child(6) .logo{--j:var(--teal)}.job:nth-child(7) .logo{--j:var(--cyan)}
+.job .logo{color:var(--j);background:color-mix(in srgb,var(--j) 14%,var(--panel));border-color:color-mix(in srgb,var(--j) 40%,var(--line))}
+details.job summary:hover .t{color:var(--cyan)}
+.job li::marker{color:var(--amber)}
+
+/* funnel, gauges, reach */
+.fl:nth-child(2) .fill{background:linear-gradient(90deg,#7C5CE0,var(--violet))}
+.fl:nth-child(3) .fill{background:linear-gradient(90deg,#1E9E6A,var(--mint))}
+.gauge{--c:var(--cyan)}.gauge.amber{--c:var(--amber)}.gauge.mint{--c:var(--mint)}
+.gauge:nth-child(3){--c:var(--violet)}.gauge:nth-child(3) .val{stroke:var(--violet)}
+.gauge .val{filter:drop-shadow(0 0 6px color-mix(in srgb,var(--c) 55%,transparent))}
+.reach .card:nth-child(1){--c:var(--cyan)}.reach .card:nth-child(2){--c:var(--amber)}.reach .card:nth-child(3){--c:var(--pink)}
+.reach .v{color:var(--c)}
+.case-stats .cs:nth-child(1) .v{color:var(--cyan)}.case-stats .cs:nth-child(2) .v{color:var(--mint)}.case-stats .cs:nth-child(3) .v{color:var(--violet)}
+.step:nth-child(1) .n{--c:var(--cyan)}.step:nth-child(2) .n{--c:var(--violet)}.step:nth-child(3) .n{--c:var(--amber)}.step:nth-child(4) .n{--c:var(--pink)}
+.step .n{background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c)}
+.edu .card:nth-child(1){--c:var(--pink)}.edu .card:nth-child(2){--c:var(--violet)}.edu .card:nth-child(3){--c:var(--cyan)}
+
+/* contact glow */
+.contact::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;left:-200px;bottom:-320px;background:radial-gradient(circle,rgba(167,139,250,.35),transparent 65%);filter:blur(40px);pointer-events:none}
+.contact::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-160px;top:-220px;background:radial-gradient(circle,rgba(61,213,243,.28),transparent 65%);filter:blur(40px);pointer-events:none}
+.contact .wrap{position:relative;z-index:1}
+.crow{transition:transform .2s,border-color .2s}
+.crow:hover{transform:translateX(4px);border-color:#3DD5F3}
+.btn-primary{background:linear-gradient(90deg,#3DD5F3,#7FE7FB);box-shadow:0 10px 30px -10px rgba(61,213,243,.7)}
+.progress{background:linear-gradient(90deg,#3DD5F3,#A78BFA,#F472B6,#F7B538)}
+.brand .mk{background:linear-gradient(135deg,#3DD5F3,#A78BFA)}
+@media (max-width:600px){.aurora{opacity:.4}.aurora i:nth-child(3){display:none}}
+
+
+/* ===== light theme overrides for the bands that used to be dark ===== */
+:root:not([data-theme="dark"]) body::before{background:#FFFFFF}
+:root:not([data-theme="dark"]) header.top{background:rgba(255,255,255,.82);border-bottom-color:var(--line);color:var(--fg)}
+:root:not([data-theme="dark"]) nav a{color:var(--muted)}
+:root:not([data-theme="dark"]) nav a:hover,:root:not([data-theme="dark"]) nav a.active{color:var(--fg);background:var(--panel2)}
+:root:not([data-theme="dark"]) nav a.active{box-shadow:inset 0 -2px 0 var(--violet)}
+:root:not([data-theme="dark"]) .icon-btn{background:#fff;border-color:var(--line);color:var(--fg)}
+:root:not([data-theme="dark"]) .hero{background:radial-gradient(1200px 520px at 85% -10%,#EDE7FE 0%,transparent 60%),radial-gradient(900px 500px at -5% 20%,#DDF4FB 0%,transparent 60%),linear-gradient(180deg,#FBFCFF 0%,#F2F6FD 100%);color:var(--fg)}
+:root:not([data-theme="dark"]) .hero::after{background-image:linear-gradient(rgba(15,27,51,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(15,27,51,.045) 1px,transparent 1px)}
+:root:not([data-theme="dark"]) .hero canvas{opacity:.35}
+:root:not([data-theme="dark"]) .aurora{opacity:.75;filter:blur(80px)}
+:root:not([data-theme="dark"]) .aurora i{mix-blend-mode:multiply}
+:root:not([data-theme="dark"]) .aurora i:nth-child(1){background:radial-gradient(circle,rgba(56,189,248,.35),transparent 65%)}
+:root:not([data-theme="dark"]) .aurora i:nth-child(2){background:radial-gradient(circle,rgba(167,139,250,.38),transparent 65%)}
+:root:not([data-theme="dark"]) .aurora i:nth-child(3){background:radial-gradient(circle,rgba(251,191,36,.25),transparent 65%)}
+:root:not([data-theme="dark"]) .avatar img{border-color:#fff}
+:root:not([data-theme="dark"]) .status{color:#B45309;border-color:rgba(217,119,6,.35);background:rgba(251,191,36,.12)}
+:root:not([data-theme="dark"]) .status i{background:#D97706}
+:root:not([data-theme="dark"]) .who .mono{color:var(--dim)!important}
+:root:not([data-theme="dark"]) .hero h1{color:var(--ink)}
+:root:not([data-theme="dark"]) .hero h1 span{background-image:linear-gradient(90deg,#0891B2,#7C3AED 55%,#DB2777)}
+:root:not([data-theme="dark"]) .typed{color:#7C3AED}
+:root:not([data-theme="dark"]) .typed::before{color:var(--dim)}
+:root:not([data-theme="dark"]) .typed b{background:#7C3AED}
+:root:not([data-theme="dark"]) .btn-primary{background:linear-gradient(90deg,#0891B2,#7C3AED);color:#fff;box-shadow:0 12px 28px -12px rgba(124,58,237,.6)}
+:root:not([data-theme="dark"]) .btn-primary:hover{filter:brightness(1.08)}
+:root:not([data-theme="dark"]) .btn-ghost{border-color:var(--line);color:var(--fg);background:#fff}
+:root:not([data-theme="dark"]) .btn-ghost:hover{border-color:var(--violet);color:var(--violet)}
+:root:not([data-theme="dark"]) .console{box-shadow:0 30px 70px -20px rgba(15,27,51,.35)}
+:root:not([data-theme="dark"]) .kpi{background:#fff;border-color:var(--line);box-shadow:0 6px 20px -12px rgba(15,27,51,.18)}
+:root:not([data-theme="dark"]) .kpi .l{color:var(--muted)}
+:root:not([data-theme="dark"]) .kpi:nth-child(1){--k:#0891B2}:root:not([data-theme="dark"]) .kpi:nth-child(2){--k:#059669}:root:not([data-theme="dark"]) .kpi:nth-child(3){--k:#7C3AED}:root:not([data-theme="dark"]) .kpi:nth-child(4){--k:#D97706}:root:not([data-theme="dark"]) .kpi:nth-child(5){--k:#DB2777}:root:not([data-theme="dark"]) .kpi:nth-child(6){--k:#0D9488}
+:root:not([data-theme="dark"]) .ticker{background:rgba(255,255,255,.7);border-top-color:var(--line);border-bottom:1px solid var(--line)}
+:root:not([data-theme="dark"]) .ticker .track{color:var(--muted)}
+:root:not([data-theme="dark"]) .ticker span::before{box-shadow:none}
+:root:not([data-theme="dark"]) section.band::before{opacity:.13}
+:root:not([data-theme="dark"]) section.alt{background:linear-gradient(180deg,#F1F5FC,#EEF2FB)}
+:root:not([data-theme="dark"]) .card{box-shadow:0 1px 2px rgba(15,27,51,.04),0 8px 24px -16px rgba(15,27,51,.12)}
+:root:not([data-theme="dark"]) .chip{background:#F4F7FC}
+:root:not([data-theme="dark"]) .filters button.on{color:#fff}
+:root:not([data-theme="dark"]) .contact{background:radial-gradient(800px 400px at 0% 100%,#EDE7FE,transparent 60%),radial-gradient(700px 380px at 100% 0%,#DDF4FB,transparent 60%),#F7F9FD;color:var(--fg);border-top:1px solid var(--line)}
+:root:not([data-theme="dark"]) .contact::before,:root:not([data-theme="dark"]) .contact::after{opacity:.25}
+:root:not([data-theme="dark"]) .contact p{color:var(--muted)}
+:root:not([data-theme="dark"]) .crow{background:#fff;border-color:var(--line);box-shadow:0 6px 18px -12px rgba(15,27,51,.2)}
+:root:not([data-theme="dark"]) .crow .ci{background:color-mix(in srgb,var(--violet) 12%,#fff);color:var(--violet)}
+:root:not([data-theme="dark"]) .crow .lab{color:var(--dim)}
+:root:not([data-theme="dark"]) .crow:hover{border-color:var(--violet)}
+:root:not([data-theme="dark"]) .copy{color:var(--violet);border-color:var(--line)}
+:root:not([data-theme="dark"]) .contact .grad{--cyan:#0891B2!important;--violet:#7C3AED!important;--pink:#DB2777!important}
+:root:not([data-theme="dark"]) footer.end{background:#fff;color:var(--dim);border-top-color:var(--line)}
+:root:not([data-theme="dark"]) .tip{background:#fff;color:var(--fg);border-color:var(--line)}
+:root:not([data-theme="dark"]) .tip span{color:var(--amber)}
+:root:not([data-theme="dark"]) .toast{background:var(--violet);color:#fff}
+:root:not([data-theme="dark"]) .fab{background:var(--violet);color:#fff}
+:root:not([data-theme="dark"]) .progress{background:linear-gradient(90deg,#0891B2,#7C3AED,#DB2777,#D97706)}
+:root:not([data-theme="dark"]) .brand .mk{background:linear-gradient(135deg,#0891B2,#7C3AED);color:#fff}
+@media (max-width:960px){:root:not([data-theme="dark"]) nav.open{background:#fff;border-bottom-color:var(--line)}}
+
+/* type: Manrope headings, solid accent colour */
+h1,h2{font-weight:800;letter-spacing:-.025em}
+.hero h1{font-weight:800;letter-spacing:-.035em}
+.sec-head h2{font-weight:800}
+/* accent words: one solid brand colour, no italics or gradients */
+.grad,.hero h1 span,:root:not([data-theme="dark"]) .hero h1 span{background:none!important;-webkit-background-clip:border-box;background-clip:border-box;color:var(--accentword)!important;animation:none!important;font-style:normal}
+:root{--accentword:#0E7490}
+:root[data-theme="dark"]{--accentword:#3DD5F3}
+.contact .grad{color:var(--accentword)!important}
+h3,.job .t,.stage h3,.sk h3,.cert h3{font-family:var(--body);font-weight:700;letter-spacing:-.005em}
+.contact h2{font-weight:800}
+.kpi .v,.reach .v,.proof .big,.cs .v,.fl .num,.gauge .pct{font-family:var(--body);font-weight:800;letter-spacing:-.02em}
+.eyebrow{letter-spacing:1.8px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
+
+<style>:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
 </head>
 <body>
-
-<header>
+<header class="top">
   <div class="wrap">
-    <div class="logo">OB / Portfolio</div>
-    <nav>
+    <a class="brand" href="#top"><span class="mk">OB</span><span>Oladayo Bello</span></a>
+    <nav id="menu" aria-label="Sections">
       <ul>
-        <li><a href="#about">About</a></li>
+        <li><a href="#pipeline">How I work</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#achievements">Impact</a></li>
-        <li><a href="#certifications">Certs</a></li>
+        <li><a href="#journey">Journey</a></li>
+        <li><a href="#casestudy">Case study</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#credentials">Credentials</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+    <div class="hdr-actions">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
   </div>
+  <div class="progress"></div>
 </header>
 
-<section class="hero" id="about">
+<section class="hero" id="top">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
-    <span class="eyebrow">Available immediately · London area, UK</span>
-    <h1>Oladayo Bello</h1>
-    <p class="role">Data Analyst &amp; Data Manager</p>
-    <p class="lede">
-      Ten years of turning complex, messy data into decisions that organisations act on.
-      I build the pipelines, dashboards and governance frameworks that make data
-      trustworthy, then communicate what it means to the people who need to use it.
-      Most recently I ran the full data lifecycle for an EU funded household survey in Kebbi State,
-      from KoboToolbox form build to live fieldwork dashboard to SPSS analysis.
-      Dual Masters in Cybersecurity and Information Science, both with Distinctions,
-      alongside deep expertise in SQL, Python, Power BI and Tableau.
-    </p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="mailto:bello.oladayo2011@yahoo.com">Get in touch</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/oladayo-bello" target="_blank" rel="noopener">LinkedIn profile</a>
+    <div class="hero-grid">
+      <div>
+        <div class="who">
+          <div class="avatar"><img src="photo.jpg" alt="Oladayo Bello" width="104" height="104"></div>
+          <div>
+            <span class="status"><i></i>Now at Richmond and Wandsworth Councils</span>
+            <div class="mono" style="font-size:13px;color:#71819C;margin-top:8px">Dartford, Kent · Right to Work in UK confirmed</div>
+          </div>
+        </div>
+        <h1>Oladayo <span>Bello</span></h1>
+        <div class="typed" aria-live="off"><span id="role">Database Administration and Data Management Analyst</span><b></b></div>
+        <p class="lede">Ten years of turning messy, high stakes data into records people trust and decisions they act on. I look after the databases, build the <strong>validation pipelines and dashboards</strong> on top of them, and explain what the numbers mean to the people who need them. Dual Masters in <strong>Cybersecurity</strong> and <strong>Information Science</strong>, both with Distinction.</p>
+        <div class="cta">
+          <a class="btn btn-primary js-email" href="mailto:bello.oladayo2011@yahoo.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email me</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/oladayo-bello" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>LinkedIn</a>
+          <a class="btn btn-ghost" href="#casestudy"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>See a case study</a>
+        </div>
+      </div>
+
+      <div class="console" aria-label="Career summary written as a SQL query">
+        <div class="bar"><i></i><i></i><i></i><span>career.sql · SQL Server</span></div>
+<pre><span class="k">SELECT</span> role, organisation, years
+<span class="k">FROM</span>   career
+<span class="k">WHERE</span>  focus <span class="k">IN</span> (<span class="s">'data quality'</span>, <span class="s">'databases'</span>, <span class="s">'BI'</span>)
+<span class="k">ORDER BY</span> start_date <span class="k">DESC</span>;</pre>
+        <div class="rs">
+          <table>
+            <thead><tr><th>role</th><th>organisation</th><th>years</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td>DBA &amp; Data Mgmt Analyst</td><td>R&amp;W Councils</td><td>2026</td></tr>
+              <tr><td>Survey Data Manager</td><td>NISER SOSAN</td><td>2026</td></tr>
+              <tr><td>SME Consultant</td><td>Gateway</td><td>2025</td></tr>
+              <tr><td>Exams Administrator</td><td>Windsor Forest</td><td>2024–25</td></tr>
+              <tr><td>Data Manager</td><td>USAID LEARN</td><td>2023–24</td></tr>
+              <tr><td>Analytics Manager</td><td>NISER</td><td>2019–23</td></tr>
+            </tbody>
+          </table>
+          <div class="foot">(6 rows affected) · 0 errors · ready</div>
+        </div>
+      </div>
     </div>
 
-    <div class="metrics">
-      <div class="metric"><div class="num">40%</div><div class="label">reduction in reporting errors at USAID</div></div>
-      <div class="metric"><div class="num">90%</div><div class="label">faster analytical turnaround at NISER</div></div>
-      <div class="metric"><div class="num">35+</div><div class="label">data professionals trained</div></div>
-      <div class="metric"><div class="num">10+</div><div class="label">years of hands on experience</div></div>
-      <div class="metric"><div class="num">11</div><div class="label">professional certifications earned</div></div>
-      <div class="metric"><div class="num">734</div><div class="label">households surveyed across six LGAs for SOSAN</div></div>
+    <div class="kpis">
+      <div class="kpi"><div class="v" data-count="10" data-suffix="+">10+</div><div class="l">years working with data</div></div>
+      <div class="kpi"><div class="v" data-count="40" data-suffix="%">40%</div><div class="l">fewer reporting errors at USAID</div></div>
+      <div class="kpi"><div class="v" data-count="90" data-suffix="%">90%</div><div class="l">faster analysis turnaround at NISER</div></div>
+      <div class="kpi"><div class="v" data-count="35" data-suffix="+">35+</div><div class="l">data officers trained</div></div>
+      <div class="kpi"><div class="v" data-count="734">734</div><div class="l">households surveyed for SOSAN</div></div>
+      <div class="kpi"><div class="v" data-count="11">11</div><div class="l">professional certifications</div></div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true"><div class="track"><span style="--c:#3DD5F3">SQL Server</span><span style="--c:#3DD5F3">T-SQL</span><span style="--c:#3DD5F3">Oracle</span><span style="--c:#A78BFA">Power BI</span><span style="--c:#A78BFA">DAX</span><span style="--c:#A78BFA">Tableau</span><span style="--c:#4ADE9B">Python</span><span style="--c:#4ADE9B">Pandas</span><span style="--c:#4ADE9B">Azure Data Factory</span><span style="--c:#F7B538">KoboToolbox</span><span style="--c:#F7B538">SPSS</span><span style="--c:#F7B538">Stata</span><span style="--c:#F472B6">GDPR</span><span style="--c:#F472B6">ISO 27001</span><span style="--c:#2DD4BF">ITIL</span><span style="--c:#2DD4BF">GitHub Actions</span><span style="--c:#3DD5F3">SQL Server</span><span style="--c:#3DD5F3">T-SQL</span><span style="--c:#3DD5F3">Oracle</span><span style="--c:#A78BFA">Power BI</span><span style="--c:#A78BFA">DAX</span><span style="--c:#A78BFA">Tableau</span><span style="--c:#4ADE9B">Python</span><span style="--c:#4ADE9B">Pandas</span><span style="--c:#4ADE9B">Azure Data Factory</span><span style="--c:#F7B538">KoboToolbox</span><span style="--c:#F7B538">SPSS</span><span style="--c:#F7B538">Stata</span><span style="--c:#F472B6">GDPR</span><span style="--c:#F472B6">ISO 27001</span><span style="--c:#2DD4BF">ITIL</span><span style="--c:#2DD4BF">GitHub Actions</span></div></div>
+</section>
+
+<section class="band" id="pipeline">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><div class="eyebrow">How I work</div><h2>From raw capture to <span class="grad">governed insight</span></h2></div>
+      <p>Every project I run follows the same six stages. Tap a stage to see the tools I use there and a result it produced.</p>
+    </div>
+    <div class="pipe rv" role="tablist" aria-label="Data pipeline stages">
+      <button class="stage on" role="tab" aria-selected="true" data-i="0"><div class="node"><span class="dot">01</span><span class="wire"></span></div><h3>Capture</h3><p>Collect it right the first time</p></button>
+      <button class="stage" role="tab" aria-selected="false" data-i="1"><div class="node"><span class="dot">02</span><span class="wire"></span></div><h3>Validate</h3><p>Catch errors before reporting</p></button>
+      <button class="stage" role="tab" aria-selected="false" data-i="2"><div class="node"><span class="dot">03</span><span class="wire"></span></div><h3>Store</h3><p>Administer and protect</p></button>
+      <button class="stage" role="tab" aria-selected="false" data-i="3"><div class="node"><span class="dot">04</span><span class="wire"></span></div><h3>Transform</h3><p>Model, recode, derive</p></button>
+      <button class="stage" role="tab" aria-selected="false" data-i="4"><div class="node"><span class="dot">05</span><span class="wire"></span></div><h3>Visualise</h3><p>Dashboards people use</p></button>
+      <button class="stage" role="tab" aria-selected="false" data-i="5"><div class="node"><span class="dot">06</span><span class="wire"></span></div><h3>Govern</h3><p>Secure, compliant, audit ready</p></button>
+    </div>
+    <div class="card stage-detail rv" id="stageDetail" role="tabpanel" aria-live="polite">
+      <div><div class="eyebrow" id="sdStep">Stage 01</div><h3 id="sdTitle" style="margin-top:8px">Capture</h3><p id="sdText" style="color:var(--muted);margin-top:8px">Survey instruments built with skip logic and constraints from day one, so field teams can't enter impossible values.</p><div class="tools" id="sdTools"></div></div>
+      <div class="proof"><div class="big" id="sdBig">748</div><p id="sdProof">interviews collected remotely across six LGAs in Kebbi State on a KoboToolbox form I built and deployed.</p><div class="src" id="sdSrc">NISER · EU funded SOSAN, 2026</div></div>
     </div>
   </div>
 </section>
 
-<section id="skills">
+<section class="band alt" id="skills">
   <div class="wrap">
-    <div class="section-eyebrow">Expertise</div>
-    <h2>Core skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card"><div class="icon">DB</div><h3>SQL &amp; databases</h3><p>Oracle, SQL Server, SSMS, complex querying, window functions, stored procedures, backup and recovery, database administration</p></div>
-      <div class="skill-card"><div class="icon">PY</div><h3>Python</h3><p>Pandas, NumPy, validation pipelines, workflow automation, data cleaning, EDA, scripting</p></div>
-      <div class="skill-card"><div class="icon">BI</div><h3>Visualisation &amp; BI</h3><p>Power BI (DAX, data models, paginated reports), Tableau, advanced Excel, Power Query</p></div>
-      <div class="skill-card"><div class="icon">GV</div><h3>Data governance</h3><p>GDPR, ISO 27001, data quality frameworks, audit ready records, data integrity, stewardship</p></div>
-      <div class="skill-card"><div class="icon">CS</div><h3>Cybersecurity</h3><p>MSc Distinction, NIST CSF, risk management, digital forensics, network security</p></div>
-      <div class="skill-card"><div class="icon">CL</div><h3>Cloud &amp; infrastructure</h3><p>AWS Cloud Foundations, cloud security, data lake concepts, Azure awareness, Git, GitHub Actions, GitHub Pages, REST APIs</p></div>
-      <div class="skill-card"><div class="icon">AN</div><h3>Analytics</h3><p>Cohort analysis, KPI reporting, customer segmentation, trend analysis, A/B testing awareness</p></div>
-      <div class="skill-card"><div class="icon">BR</div><h3>BI &amp; reporting</h3><p>Executive dashboards, donor level reporting, non technical translation, stakeholder briefings</p></div>
-      <div class="skill-card"><div class="icon">LD</div><h3>Leadership</h3><p>Multi site team management, 35+ professionals trained, mentoring, coaching, curriculum design</p></div>
-      <div class="skill-card"><div class="icon">TL</div><h3>Tools</h3><p>Microsoft 365, SharePoint, Teams, Jira, Microsoft Project, Visio, Canva, Adobe Express, Git version control</p></div>
-      <div class="skill-card"><div class="icon">SP</div><h3>Statistical &amp; predictive</h3><p>Statistical analysis, hypothesis testing, predictive analytics and forecasting, machine learning fundamentals, R programming</p></div>
-      <div class="skill-card"><div class="icon">ET</div><h3>ETL &amp; data warehousing</h3><p>ETL development, Azure Data Factory, Azure Synapse, Snowflake, Amazon Redshift, data modelling and database design</p></div>
-      <div class="skill-card"><div class="icon">MD</div><h3>Methodology &amp; delivery</h3><p>Agile, Scrum, Waterfall, PRINCE2, requirements gathering and business analysis, process mapping, root cause analysis</p></div>
-      <div class="skill-card"><div class="icon">SV</div><h3>Survey &amp; field data</h3><p>KoboToolbox, XLSForm, skip logic and constraints, enumerator management, GPS capture, survey sampling, field quality control</p></div>
-      <div class="skill-card"><div class="icon">ST</div><h3>SPSS &amp; Stata</h3><p>Syntax driven recoding, value labels, multiple response sets, cross tabulation, reproducible analysis files</p></div>
-      <div class="skill-card"><div class="icon">FS</div><h3>Food security indicators</h3><p>FCS, HFIAS, rCSI, HDDS, MDD-W, Washington Group disability questions, composite vulnerability scoring</p></div>
+    <div class="sec-head rv">
+      <div><div class="eyebrow">Toolbelt</div><h2>Skills, grouped by where they sit in <span class="grad">the stack</span></h2></div>
+      <p>Filter by area. Each card lists the tools I use day to day, not ones I have only read about.</p>
+    </div>
+    <div class="filters" id="skillFilters">
+      <button class="on" data-f="all">All</button>
+      <button data-f="db">Databases</button>
+      <button data-f="an">Analytics &amp; BI</button>
+      <button data-f="eng">Engineering</button>
+      <button data-f="gov">Governance &amp; security</button>
+      <button data-f="field">Field data</button>
+      <button data-f="lead">Delivery &amp; leadership</button>
+    </div>
+    <div class="skill-grid" id="skillGrid"></div>
+  </div>
+</section>
+
+<section class="band" id="journey">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><div class="eyebrow">Career journey</div><h2>Twelve years on <span class="grad">one timeline</span></h2></div>
+      <p>Roles, consultancies and study, drawn to scale. Overlaps are real: the USAID consultancy ran alongside NISER, and SOSAN alongside Gateway. Hover or tap a bar for detail.</p>
+    </div>
+    <div class="card rv">
+      <div class="gantt" id="gantt"></div>
+      <div class="legend"><span><i style="background:var(--cyan)"></i>Employment</span><span><i style="background:var(--amber)"></i>Consultancy</span><span><i style="background:var(--mint)"></i>Study</span></div>
+    </div>
+
+    <div class="xp">
+      <details class="card job rv" open>
+        <summary><span class="logo">RW</span><span><span class="t">Database Administration and Data Management Analyst</span><br><span class="o">Richmond and Wandsworth Councils · Better Service Partnership, Digital, Data and Technology</span></span><span class="d"><em>Oct 2026 — Present</em>London <span class="chev">▾</span></span></summary>
+        <div class="body">
+          <p style="color:var(--muted);font-size:14.5px;margin-bottom:10px">Part of the Data Architecture team serving both councils, keeping the databases behind resident services secure, available and accurate.</p>
+          <ul>
+            <li>Administer and support SQL Server and Oracle databases in live production, covering configuration, performance tuning and patching</li>
+            <li>Run and test backup and recovery routines, supporting high availability and disaster recovery for council systems</li>
+            <li>Diagnose and resolve database incidents, escalating where needed and leading corrective improvements afterwards</li>
+            <li>Work within ITIL incident, problem and change management so every change is controlled and recorded</li>
+            <li>Manage, transform and consolidate data from multiple sources into reliable, well structured datasets</li>
+            <li>Protect data quality, integrity and security, applying role based access and least privilege</li>
+            <li>Ensure GDPR and retention compliance at the database layer and provide evidence for audits</li>
+            <li>Support the reliability of the Power BI and analytics platform used across both councils</li>
+            <li>Maintain clear technical documentation and spot opportunities to automate routine database tasks</li>
+            <li>Work with the Data Architect and service teams to turn business needs into dependable data services</li>
+          </ul>
+          <div class="tags"><span class="chip">SQL Server</span><span class="chip">Oracle</span><span class="chip">SSMS</span><span class="chip">T-SQL</span><span class="chip">Backup &amp; recovery</span><span class="chip">HA / DR</span><span class="chip">ITIL</span><span class="chip">GDPR</span><span class="chip">Power BI</span><span class="chip">Local government</span></div>
+        </div>
+      </details>
+
+      <details class="card job rv" open>
+        <summary><span class="logo">SO</span><span><span class="t">Survey Data Manager (Consultant)</span><br><span class="o">NISER · EU funded SOSAN Project, Kebbi State</span></span><span class="d"><em>Aug 2026 — Present</em>Remote <span class="chev">▾</span></span></summary>
+        <div class="body">
+          <ul>
+            <li>Built the household questionnaire in KoboToolbox using XLSForm, with skip logic and validation across five survey sections</li>
+            <li>Deployed and supported field enumerators remotely across six LGAs, collecting 748 interviews and 734 valid households</li>
+            <li>Built a live fieldwork dashboard pulling from the Kobo API through GitHub Actions, refreshing hourly for supervisors</li>
+            <li>Wrote nine SPSS syntax files recoding raw exports and computing FCS, HFIAS, rCSI, MDD-W and disability indicators</li>
+            <li>Found and fixed silent export errors, including Excel corrupting income bracket codes, before they reached reporting</li>
+          </ul>
+          <div class="tags"><span class="chip">KoboToolbox</span><span class="chip">XLSForm</span><span class="chip">SPSS</span><span class="chip">Stata</span><span class="chip">GitHub Actions</span></div>
+        </div>
+      </details>
+
+      <details class="card job rv">
+        <summary><span class="logo">GQ</span><span><span class="t">Subject Matter Expert, Data Analytics (Consultant)</span><br><span class="o">Gateway Qualifications · UK</span></span><span class="d"><em>Jul 2025 — Present</em>UK <span class="chev">▾</span></span></summary>
+        <div class="body">
+          <ul>
+            <li>Designed SQL, Python and Power BI curriculum built entirely on real world datasets, reviewed against current industry standards</li>
+            <li>Produced assessment materials covering data cleaning, transformation, visualisation and interpretation to publication ready standard</li>
+            <li>Wrote Business Requirements Documents, functional specifications and Standard Operating Procedures that turn stakeholder needs into audit ready deliverables</li>
+            <li>Applied ETL processes and data governance controls across curriculum datasets, embedding master data management standards</li>
+          </ul>
+          <div class="tags"><span class="chip">Curriculum design</span><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Power BI</span></div>
+        </div>
+      </details>
+
+      <details class="card job rv">
+        <summary><span class="logo">WF</span><span><span class="t">Exams Administrator</span><br><span class="o">Windsor Forest Colleges Group · UK</span></span><span class="d"><em>Mar 2024 — Oct 2025</em>UK <span class="chev">▾</span></span></summary>
+        <div class="body">
+          <ul>
+            <li>Produced statutory compliance and performance reports, keeping 100% accuracy across every reporting period</li>
+            <li>Identified process gaps and put fixes in place that were adopted department wide</li>
+            <li>Used Excel, SharePoint and Teams at an advanced level daily for information management and multi stakeholder reporting</li>
+          </ul>
+          <div class="tags"><span class="chip">Compliance reporting</span><span class="chip">Data accuracy</span><span class="chip">Process improvement</span></div>
+        </div>
+      </details>
+
+      <details class="card job rv">
+        <summary><span class="logo">US</span><span><span class="t">Data Manager (Consultant)</span><br><span class="o">USAID LEARN to Read Programme · three states</span></span><span class="d"><em>Feb 2023 — Aug 2024</em>Nigeria <span class="chev">▾</span></span></summary>
+        <div class="body">
+          <ul>
+            <li>Led data operations across a three state education programme serving over 100,000 beneficiaries, reporting directly to international donors</li>
+            <li>Built Power BI and Tableau dashboards adopted as the main performance tracking tool by programme leadership</li>
+            <li>Cut reporting errors by 40% and data turnaround by 45% through automated Python validation pipelines</li>
+            <li>Trained 35 data officers in SQL collection standards and data quality processes</li>
+          </ul>
+          <div class="tags"><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Team training</span></div>
+        </div>
+      </details>
+
+      <details class="card job rv">
+        <summary><span class="logo">NI</span><span><span class="t">Data Analyst and Analytics Manager</span><br><span class="o">Nigerian Institute of Social and Economic Research (NISER)</span></span><span class="d"><em>Dec 2019 — Nov 2023</em>Ibadan <span class="chev">▾</span></span></summary>
+        <div class="body">
+          <ul>
+            <li>Analysed quantitative and qualitative datasets across six geopolitical zones, with findings feeding national policy recommendations</li>
+            <li>Automated reporting workflows in Python, cutting end to end turnaround by 90%</li>
+            <li>Cleaned and transformed large field datasets using SQL and Python ahead of every analysis cycle</li>
+            <li>Coached junior analysts in statistical techniques and data quality over four years</li>
+          </ul>
+          <div class="tags"><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Policy research</span><span class="chip">Mentoring</span></div>
+        </div>
+      </details>
+
+      <details class="card job rv">
+        <summary><span class="logo">EM</span><span><span class="t">Database Administrator</span><br><span class="o">E Merchant CM · Lagos</span></span><span class="d"><em>Feb 2014 — Jul 2015</em>Lagos <span class="chev">▾</span></span></summary>
+        <div class="body">
+          <ul>
+            <li>Started my career administering the company's databases for an ecommerce business, keeping product and order records accurate and available</li>
+          </ul>
+          <div class="tags"><span class="chip">Database administration</span><span class="chip">Ecommerce</span></div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
 
-<section id="experience">
+<section class="band alt" id="casestudy">
   <div class="wrap">
-    <div class="section-eyebrow">Work history</div>
-    <h2>Experience</h2>
-
-    <div class="exp-item">
-      <div class="exp-head">
-        <div>
-          <div class="exp-title">Survey Data Manager (Consultant)</div>
-          <div class="exp-org">NISER · EU funded SOSAN Project, Kebbi State · Remote</div>
-        </div>
-        <div class="exp-dates">Aug 2026 — Present</div>
-      </div>
-      <ul>
-        <li>Built the household questionnaire in KoboToolbox using XLSForm, with skip logic and validation across five survey sections</li>
-        <li>Deployed and supported field enumerators remotely across six LGAs, collecting 748 interviews and 734 valid households</li>
-        <li>Built a live fieldwork dashboard pulling from the Kobo API through GitHub Actions, refreshing hourly for supervisors</li>
-        <li>Achieved 99.6% GPS capture and tracked every missing case by enumerator and community</li>
-        <li>Wrote nine SPSS syntax files recoding raw exports and computing FCS, HFIAS, rCSI, MDD-W and disability indicators</li>
-        <li>Found and fixed silent export errors, including Excel corrupting income bracket codes, before they reached reporting</li>
-        <li>Produced analysis tables, charts and community GPS maps for the Oxfam led consortium</li>
-      </ul>
-      <div class="tags"><span class="tag">KoboToolbox</span><span class="tag">XLSForm</span><span class="tag">SPSS</span><span class="tag">Stata</span><span class="tag">Python</span><span class="tag">GitHub Actions</span><span class="tag">Food security</span><span class="tag">Field management</span></div>
+    <div class="sec-head rv">
+      <div><div class="eyebrow">Case study · 2026</div><h2>Running a 700 household survey from <span class="grad">5,000 km away</span></h2></div>
+      <p>For the EU funded SOSAN social safety net project in Kebbi State, I owned the whole data lifecycle remotely from the UK, for an Oxfam led consortium.</p>
     </div>
-
-    <div class="exp-item">
-      <div class="exp-head">
-        <div>
-          <div class="exp-title">Subject Matter Expert, Data Analytics</div>
-          <div class="exp-org">Gateway Qualifications · UK</div>
+    <div class="case">
+      <div class="card rv">
+        <h3 style="font-size:18px">Data quality funnel</h3>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px">Every record was checked for consent and location before it counted.</p>
+        <div class="funnel" id="funnel">
+          <div class="fl"><div class="track"><div class="fill" data-w="100" style="width:100%">Interviews submitted</div></div><div class="num">748</div></div>
+          <div class="fl"><div class="track"><div class="fill" data-w="98.1" style="width:98.1%">Valid with consent</div></div><div class="num">734</div></div>
+          <div class="fl"><div class="track"><div class="fill" data-w="97.7" style="width:97.7%">GPS location captured</div></div><div class="num">731</div></div>
         </div>
-        <div class="exp-dates">Jul 2025 — Present</div>
-      </div>
-      <ul>
-        <li>Designed SQL, Python and Power BI curriculum built entirely on real world datasets, reviewed against current industry standards</li>
-        <li>Produced structured assessment materials covering data cleaning, transformation, visualisation and interpretation to publication ready standard</li>
-        <li>Produced Business Requirements Documents, functional specifications and Standard Operating Procedures translating stakeholder needs into audit ready deliverables</li>
-        <li>Applied ETL processes and data governance controls across curriculum datasets, embedding master data management standards</li>
-      </ul>
-      <div class="tags"><span class="tag">Curriculum design</span><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">Data governance</span></div>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-head">
-        <div>
-          <div class="exp-title">Exams Administrator</div>
-          <div class="exp-org">Windsor Forest Colleges Group · UK</div>
+        <div class="case-stats">
+          <div class="cs"><div class="v">6</div><div class="l">LGAs covered</div></div>
+          <div class="cs"><div class="v">99.6%</div><div class="l">GPS capture on valid records</div></div>
+          <div class="cs"><div class="v">9</div><div class="l">SPSS syntax files</div></div>
         </div>
-        <div class="exp-dates">Mar 2024 — Oct 2025</div>
       </div>
-      <ul>
-        <li>Produced statutory compliance and performance reports maintaining 100% accuracy across every reporting period</li>
-        <li>Identified process gaps and implemented fixes adopted department wide, improving cross functional reporting consistency</li>
-        <li>Used Microsoft 365 suite at advanced level daily, including Excel, Word, SharePoint and Teams, for information management and multi stakeholder reporting</li>
-      </ul>
-      <div class="tags"><span class="tag">Compliance reporting</span><span class="tag">Data accuracy</span><span class="tag">UK education</span><span class="tag">Process improvement</span></div>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-head">
-        <div>
-          <div class="exp-title">Data Manager (Consultant)</div>
-          <div class="exp-org">USAID, LEARN to Read Programme · Multi state programme</div>
+      <div class="card rv">
+        <h3 style="font-size:18px">What I built</h3>
+        <div class="steps">
+          <div class="step"><span class="n">1</span><div><b>Instrument</b><p>XLSForm questionnaire with skip logic, constraints and GPS capture, deployed on KoboToolbox.</p></div></div>
+          <div class="step"><span class="n">2</span><div><b>Live monitoring</b><p>A GitHub Pages dashboard fed by the Kobo API through scheduled GitHub Actions, refreshing every hour for supervisors.</p></div></div>
+          <div class="step"><span class="n">3</span><div><b>Analysis pipeline</b><p>Reproducible SPSS syntax that recodes exports and derives FCS, HFIAS, rCSI, MDD-W and Washington Group disability flags.</p></div></div>
+          <div class="step"><span class="n">4</span><div><b>Quality catch</b><p>Spotted Excel silently stripping underscores from income bracket codes and fixed the recode before any table was produced.</p></div></div>
         </div>
-        <div class="exp-dates">Feb 2023 — Aug 2024</div>
-      </div>
-      <ul>
-        <li>Led data operations and analytics delivery across a three state education programme serving over 100,000 beneficiaries, reporting directly to international donors</li>
-        <li>Cleaned and linked large scale datasets across three states, resolving field inconsistencies blocking accurate reporting</li>
-        <li>Built Power BI and Tableau dashboards adopted as the primary performance tracking tool by programme leadership</li>
-        <li>Cut reporting errors by 40% and data turnaround by 45% through automated Python validation pipelines</li>
-        <li>Trained 35 data officers in SQL collection standards and data quality processes</li>
-      </ul>
-      <div class="tags"><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Data governance</span><span class="tag">USAID</span><span class="tag">Team training</span></div>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-head">
-        <div>
-          <div class="exp-title">Data Analyst and Analytics Manager</div>
-          <div class="exp-org">Nigerian Institute of Social and Economic Research (NISER)</div>
-        </div>
-        <div class="exp-dates">Dec 2019 — Nov 2023</div>
-      </div>
-      <ul>
-        <li>Analysed quantitative and qualitative datasets across six geopolitical regions, with findings feeding into national policy recommendations</li>
-        <li>Automated reporting workflows in Python, cutting end to end turnaround by 90%</li>
-        <li>Cleaned and transformed large field datasets using SQL and Python ahead of every analysis cycle</li>
-        <li>Segmented user base and programme participant data to support strategic planning across six zones</li>
-        <li>Coached junior analysts in statistical techniques and data quality over four years</li>
-      </ul>
-      <div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Policy research</span><span class="tag">Workflow automation</span><span class="tag">Mentoring</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="achievements">
-  <div class="wrap">
-    <div class="section-eyebrow">Measurable outcomes</div>
-    <h2>Impact by numbers</h2>
-    <div class="impact-grid">
-      <div class="impact-card">
-        <div class="num">734</div>
-        <div class="desc">Valid households surveyed across six LGAs in Kebbi State, managed remotely from the UK from form build to final analysis</div>
-        <div class="src">NISER, EU funded SOSAN</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">99.6%</div>
-        <div class="desc">GPS capture rate across every interview, with each missing case logged by enumerator, community and reason</div>
-        <div class="src">NISER, EU funded SOSAN</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">40%</div>
-        <div class="desc">Reduction in reporting errors across a three state USAID programme through a purpose built Python data quality and validation framework</div>
-        <div class="src">USAID, LEARN to Read</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">45%</div>
-        <div class="desc">Faster data processing turnaround through automated validation pipelines, enabling more reliable donor reporting cycles</div>
-        <div class="src">USAID, LEARN to Read</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">90%</div>
-        <div class="desc">Reduction in end to end analytical turnaround at NISER through full Python workflow automation across six operational regions</div>
-        <div class="src">NISER, four year tenure</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">35+</div>
-        <div class="desc">Data professionals trained in SQL standards, validation processes and reporting best practice across geographically dispersed teams</div>
-        <div class="src">USAID multi state programme</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">100%</div>
-        <div class="desc">Reporting accuracy maintained throughout an entire tenure of statutory compliance reporting in a regulated UK education institution</div>
-        <div class="src">Windsor Forest Colleges Group</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">100,000+</div>
-        <div class="desc">Beneficiaries reached by a three state education programme, supported by executive dashboards and reporting delivered to international donors</div>
-        <div class="src">USAID, LEARN to Read</div>
-      </div>
-      <div class="impact-card">
-        <div class="num">6</div>
-        <div class="desc">Geopolitical regions covered with quantitative analysis feeding directly into national government policy recommendations</div>
-        <div class="src">NISER, national policy research</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="certifications">
+<section class="band" id="impact">
   <div class="wrap">
-    <div class="section-eyebrow">Credentials</div>
-    <h2>Certifications</h2>
+    <div class="sec-head rv">
+      <div><div class="eyebrow">Measured outcomes</div><h2>Impact, <span class="grad">by the numbers</span></h2></div>
+      <p>Results from roles where I owned the data, each tied to the organisation where it happened.</p>
+    </div>
+    <div class="gauges" id="gauges">
+      <div class="card gauge rv" data-p="40"><svg viewBox="0 0 132 132"><circle class="trk" cx="66" cy="66" r="54" fill="none" stroke-width="12"/><circle class="val" cx="66" cy="66" r="54" fill="none" stroke-width="12" stroke-linecap="round" transform="rotate(-90 66 66)"/><text class="pct" x="66" y="75" text-anchor="middle">40%</text></svg><h3>Fewer reporting errors</h3><p>Python data quality framework across three states</p><div class="src">USAID LEARN to Read</div></div>
+      <div class="card gauge amber rv" data-p="45"><svg viewBox="0 0 132 132"><circle class="trk" cx="66" cy="66" r="54" fill="none" stroke-width="12"/><circle class="val" cx="66" cy="66" r="54" fill="none" stroke-width="12" stroke-linecap="round" transform="rotate(-90 66 66)"/><text class="pct" x="66" y="75" text-anchor="middle">45%</text></svg><h3>Faster data turnaround</h3><p>Automated validation for donor reporting cycles</p><div class="src">USAID LEARN to Read</div></div>
+      <div class="card gauge rv" data-p="90"><svg viewBox="0 0 132 132"><circle class="trk" cx="66" cy="66" r="54" fill="none" stroke-width="12"/><circle class="val" cx="66" cy="66" r="54" fill="none" stroke-width="12" stroke-linecap="round" transform="rotate(-90 66 66)"/><text class="pct" x="66" y="75" text-anchor="middle">90%</text></svg><h3>Faster analysis</h3><p>End to end workflow automation in Python</p><div class="src">NISER</div></div>
+      <div class="card gauge mint rv" data-p="100"><svg viewBox="0 0 132 132"><circle class="trk" cx="66" cy="66" r="54" fill="none" stroke-width="12"/><circle class="val" cx="66" cy="66" r="54" fill="none" stroke-width="12" stroke-linecap="round" transform="rotate(-90 66 66)"/><text class="pct" x="66" y="75" text-anchor="middle">100%</text></svg><h3>Reporting accuracy</h3><p>Statutory compliance reporting, every period</p><div class="src">Windsor Forest Colleges</div></div>
+    </div>
+    <div class="reach">
+      <div class="card rv"><div class="v" data-count="100000" data-suffix="+">100,000+</div><p>beneficiaries reached by the USAID programme I managed data for</p></div>
+      <div class="card rv"><div class="v" data-count="35" data-suffix="+">35+</div><p>data officers trained in SQL standards and quality checks<span class="dots" id="dots"></span></p></div>
+      <div class="card rv"><div class="v" data-count="6">6</div><p>geopolitical zones covered by NISER analysis feeding national policy</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="credentials">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><div class="eyebrow">Credentials</div><h2>Certifications and <span class="grad">education</span></h2></div>
+      <p>Filter certifications by area.</p>
+    </div>
+    <div class="filters" id="certFilters">
+      <button class="on" data-f="all">All</button>
+      <button data-f="data">Data &amp; BI</button>
+      <button data-f="cyber">Cybersecurity</button>
+      <button data-f="cloud">Cloud &amp; AI</button>
+    </div>
     <div class="cert-grid">
-      <div class="cert-card"><div class="org">micro1</div><h3>AI Interview, Outstanding Performance</h3><div class="date">May 2026 · Top performance band</div></div>
-      <div class="cert-card"><div class="org">Cisco Networking Academy</div><h3>Introduction to Cybersecurity</h3><div class="date">May 2025</div></div>
-      <div class="cert-card"><div class="org">Google</div><h3>Foundations of Cybersecurity</h3><div class="date">Sep 2024</div></div>
-      <div class="cert-card"><div class="org">ISC2</div><h3>ISC2 Candidate</h3><div class="date">Oct 2024 · Security fundamentals</div></div>
-      <div class="cert-card"><div class="org">Amazon Web Services</div><h3>AWS Academy Cloud Foundations</h3><div class="date">Jun 2024</div></div>
-      <div class="cert-card"><div class="org">PwC Switzerland via Forage</div><h3>Power BI Job Simulation</h3><div class="date">Apr 2024</div></div>
-      <div class="cert-card"><div class="org">Telstra via Forage</div><h3>Cybersecurity Job Simulation</h3><div class="date">Apr 2024</div></div>
-      <div class="cert-card"><div class="org">Accenture North America via Forage</div><h3>Data Analytics &amp; Visualisation Simulation</h3><div class="date">Apr 2024</div></div>
-      <div class="cert-card"><div class="org">Datacom via Forage</div><h3>Cybersecurity Job Simulation</h3><div class="date">Apr 2024</div></div>
-      <div class="cert-card"><div class="org">Coursera</div><h3>Excel Essentials for Data Analytics</h3><div class="date">Nov 2022</div></div>
-      <div class="cert-card"><div class="org">Coursera</div><h3>Data Science Orientation</h3><div class="date">Nov 2022</div></div>
+      <div class="card cert" data-cat="cloud"><div class="org">micro1</div><h3>AI Interview, Outstanding Performance</h3><div class="dt">May 2026 · top band</div></div>
+      <div class="card cert" data-cat="cyber"><div class="org">Cisco Networking Academy</div><h3>Introduction to Cybersecurity</h3><div class="dt">May 2025</div></div>
+      <div class="card cert" data-cat="cyber"><div class="org">ISC2</div><h3>ISC2 Candidate</h3><div class="dt">Oct 2024 · security fundamentals</div></div>
+      <div class="card cert" data-cat="cyber"><div class="org">Google</div><h3>Foundations of Cybersecurity</h3><div class="dt">Sep 2024</div></div>
+      <div class="card cert" data-cat="cloud"><div class="org">Amazon Web Services</div><h3>AWS Academy Cloud Foundations</h3><div class="dt">Jun 2024</div></div>
+      <div class="card cert" data-cat="data"><div class="org">PwC Switzerland · Forage</div><h3>Power BI Job Simulation</h3><div class="dt">Apr 2024</div></div>
+      <div class="card cert" data-cat="data"><div class="org">Accenture North America · Forage</div><h3>Data Analytics &amp; Visualisation</h3><div class="dt">Apr 2024</div></div>
+      <div class="card cert" data-cat="cyber"><div class="org">Telstra · Forage</div><h3>Cybersecurity Job Simulation</h3><div class="dt">Apr 2024</div></div>
+      <div class="card cert" data-cat="cyber"><div class="org">Datacom · Forage</div><h3>Cybersecurity Job Simulation</h3><div class="dt">Apr 2024</div></div>
+      <div class="card cert" data-cat="data"><div class="org">Coursera</div><h3>Excel Essentials for Data Analytics</h3><div class="dt">Nov 2022</div></div>
+      <div class="card cert" data-cat="data"><div class="org">Coursera</div><h3>Data Science Orientation</h3><div class="dt">Nov 2022</div></div>
+    </div>
+    <div class="edu">
+      <div class="card rv"><span class="badge">Distinction</span><h3>MSc Cybersecurity</h3><div class="o">Buckinghamshire New University, UK · 2024 — 2025</div><div class="m">GDPR · ISO 27001 · risk management · network security · digital forensics</div></div>
+      <div class="card rv"><span class="badge">Distinction</span><h3>MSc Information Science</h3><div class="o">University of Ibadan, Nigeria · 2015 — 2017</div><div class="m">Data systems · research methods · knowledge management · information retrieval</div></div>
+      <div class="card rv"><span class="badge">Second Class Division</span><h3>BTech Computer Science</h3><div class="o">Ladoke Akintola University of Technology · 2004 — 2010</div><div class="m">Database systems · software engineering · programming</div></div>
     </div>
   </div>
 </section>
 
-<section id="education">
+<section class="contact" id="contact">
   <div class="wrap">
-    <div class="section-eyebrow">Academic background</div>
-    <h2>Education</h2>
-
-    <div class="edu-item">
-      <h3>MSc Cybersecurity <span class="badge">Distinction</span></h3>
-      <div class="org">Buckinghamshire New University, UK · 2024 — 2025</div>
-      <div class="modules">GDPR · ISO 27001 · Data protection · Risk management · Network security · Digital forensics · Cybersecurity awareness</div>
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h2 style="margin-top:12px">Let's <span class="grad" style="--cyan:#3DD5F3;--violet:#A78BFA;--pink:#F472B6">connect.</span></h2>
+      <p>Always glad to connect with fellow data and database professionals, swap notes on SQL Server and data quality, or talk about survey data work.</p>
+      <div class="cta"><a class="btn btn-primary js-email" href="mailto:bello.oladayo2011@yahoo.com">Send a message</a></div>
     </div>
-
-    <div class="edu-item">
-      <h3>MSc Information Science <span class="badge">Distinction</span></h3>
-      <div class="org">University of Ibadan, Nigeria · 2015 — 2017</div>
-      <div class="modules">Data systems · Research methods · Knowledge management · Information retrieval</div>
-    </div>
-
-    <div class="edu-item">
-      <h3>BTech Computer Science <span class="badge">Second Class Division</span></h3>
-      <div class="org">Ladoke Akintola University of Technology · 2004 — 2010</div>
-      <div class="modules">Computer science foundations · Software engineering · Database systems · Programming</div>
+    <div class="clist">
+      <div class="crow"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><div class="lab">Email</div><div class="val">bello.oladayo2011@yahoo.com</div></div><button class="copy" type="button" data-copy="bello.oladayo2011@yahoo.com">Copy</button></div>
+      <div class="crow"><span class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><div class="lab">Phone</div><div class="val">+44 7979 618740</div></div><button class="copy" type="button" data-copy="+447979618740">Copy</button></div>
+      <a class="crow" href="https://www.linkedin.com/in/oladayo-bello" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span><div><div class="lab">LinkedIn</div><div class="val">linkedin.com/in/oladayo-bello</div></div><span class="copy">Open ↗</span></a>
     </div>
   </div>
 </section>
 
-<footer id="contact">
-  <div class="wrap">
-    <h2>Open to the right opportunity</h2>
-    <p class="quote">"I build the data infrastructure that makes every downstream decision trustworthy."</p>
-    <div class="contact-row">
-      <a href="mailto:bello.oladayo2011@yahoo.com">bello.oladayo2011@yahoo.com</a>
-      <a href="tel:+447979618740">+44 7979 618740</a>
-      <a href="https://www.linkedin.com/in/oladayo-bello" target="_blank" rel="noopener">linkedin.com/in/oladayo-bello</a>
-    </div>
-    <p class="fine">Oladayo Bello · Data Analyst · Dartford, London · Right to Work in UK confirmed</p>
-  </div>
+<footer class="end">
+  <div class="wrap"><span>© 2026 Oladayo Bello · Dartford, Kent</span><a href="#top">Back to top ↑</a></div>
 </footer>
+
+<div class="modal" id="mailModal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mailT">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <h3 id="mailT">Email Oladayo</h3>
+    <p class="addr">bello.oladayo2011@yahoo.com</p>
+    <div class="opts">
+      <a target="_blank" rel="noopener" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=bello.oladayo2011@yahoo.com&amp;su=Hello%20Oladayo">Open in Gmail</a>
+      <a target="_blank" rel="noopener" href="https://outlook.live.com/mail/0/deeplink/compose?to=bello.oladayo2011@yahoo.com&amp;subject=Hello%20Oladayo">Open in Outlook</a>
+      <a href="mailto:bello.oladayo2011@yahoo.com?subject=Hello%20Oladayo">Use my email app</a>
+      <button type="button" class="copy" data-copy="bello.oladayo2011@yahoo.com">Copy address</button>
+    </div>
+  </div>
+</div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="fab" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<script>
+document.documentElement.classList.add('js');
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* theme toggle */
+const root=document.documentElement;
+try{const t=localStorage.getItem('ob-theme');if(t)root.dataset.theme=t}catch(e){}
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  const dark=root.dataset.theme==='dark';
+  root.dataset.theme=dark?'light':'dark';try{localStorage.setItem('ob-theme',root.dataset.theme)}catch(e){}
+  drawGantt();
+});
+
+/* mobile menu */
+const menu=document.getElementById('menu'),mb=document.getElementById('menuBtn');
+mb.addEventListener('click',()=>{const o=menu.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');mb.setAttribute('aria-expanded',false)}));
+
+/* toast + copy */
+const toast=document.querySelector('.toast');let tt;
+function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),2200)}
+async function copyText(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}a.remove();return ok}}
+document.addEventListener('click',async e=>{const b=e.target.closest('button.copy');if(!b)return;const ok=await copyText(b.dataset.copy);say(ok?'Copied: '+b.dataset.copy:'Select and copy: '+b.dataset.copy)});
+
+/* email chooser */
+const modal=document.getElementById('mailModal');
+document.querySelectorAll('.js-email').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();modal.hidden=false;modal.querySelector('.opts a').focus()}));
+modal.addEventListener('click',e=>{if(e.target===modal||e.target.closest('.x'))modal.hidden=true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.hidden=true});
+
+/* typed role */
+const roles=['Database Administration and Data Management Analyst','SQL Server and data quality specialist','Power BI and Python analyst','Remote survey data manager','MSc Cybersecurity, Distinction'];
+const roleEl=document.getElementById('role');
+if(!still){let r=0,i=roles[0].length,del=false,hold=true;
+  (function tick(){let d=45;
+    if(hold){hold=false;del=true;d=2600}
+    else if(del){i--;d=22;if(i<=0){del=false;r=(r+1)%roles.length}}
+    else{i++;if(i>=roles[r].length)hold=true}
+    roleEl.textContent=roles[r].slice(0,Math.max(i,0));setTimeout(tick,d)})();}
+
+/* network canvas in hero */
+(function(){const c=document.getElementById('net'),x=c.getContext('2d');let W,H,pts=[];
+  function size(){const r=c.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    const n=Math.round(Math.min(70,W*H/16000));pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25}))}
+  function draw(){x.clearRect(0,0,W,H);
+    for(let i=0;i<pts.length;i++){const p=pts[i];if(!still){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1}
+      for(let j=i+1;j<pts.length;j++){const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<130){x.strokeStyle='rgba(61,213,243,'+(0.16*(1-d/130))+')';x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}
+      x.fillStyle=i%7===0?'rgba(247,181,56,.7)':'rgba(61,213,243,.55)';x.beginPath();x.arc(p.x,p.y,i%7===0?2.2:1.5,0,7);x.fill()}
+    if(!still)requestAnimationFrame(draw)}
+  size();draw();addEventListener('resize',()=>{size();if(still)draw()})})();
+
+/* pipeline stages */
+const stages=[
+ {t:'Capture',x:'Survey instruments built with skip logic and constraints from day one, so field teams cannot enter impossible values.',tools:['KoboToolbox','XLSForm','GPS capture','Enumerator management'],big:'748',p:'interviews collected remotely across six LGAs in Kebbi State on a KoboToolbox form I built and deployed.',s:'NISER · EU funded SOSAN, 2026'},
+ {t:'Validate',x:'Automated checks that flag missing, duplicated and out of range values before anyone builds a report on them.',tools:['Python','Pandas','Validation rules','Data quality frameworks'],big:'40%',p:'fewer reporting errors across a three state programme after I replaced manual checks with Python validation pipelines.',s:'USAID LEARN to Read'},
+ {t:'Store',x:'Databases kept healthy, backed up, recoverable and access controlled, so the data underneath every report is safe.',tools:['SQL Server','SSMS','Oracle','Backup & recovery','Access control'],big:'2 councils',p:'served by the shared Digital, Data and Technology team where I now administer SQL Server and Oracle databases, backups and recovery.',s:'Richmond and Wandsworth, Oct 2026 to present'},
+ {t:'Transform',x:'Raw exports reshaped into clean, documented, reproducible datasets with derived indicators analysts can rely on.',tools:['SQL','Python','SPSS syntax','Stata','ETL'],big:'9',p:'SPSS syntax files that rebuild every SOSAN indicator from the raw export in one run, from FCS to disability flags.',s:'NISER · EU funded SOSAN, 2026'},
+ {t:'Visualise',x:'Dashboards designed around the questions leadership actually asks, kept simple enough to use every week.',tools:['Power BI','DAX','Tableau','GitHub Pages','Chart.js'],big:'Hourly',p:'refresh on a live fieldwork dashboard fed by the Kobo API, so supervisors could track progress by LGA and enumerator.',s:'NISER · EU funded SOSAN, 2026'},
+ {t:'Govern',x:'Data protection, security and audit trails built into the work, backed by an MSc in Cybersecurity.',tools:['GDPR','ISO 27001','NIST CSF','Audit ready records'],big:'100%',p:'reporting accuracy held across every statutory compliance period in a regulated UK education provider.',s:'Windsor Forest Colleges Group'}];
+const sb=[...document.querySelectorAll('.stage')];
+const stageCols=['var(--cyan)','var(--mint)','var(--violet)','var(--amber)','var(--pink)','var(--teal)'];
+function showStage(i){const s=stages[i];document.getElementById('stageDetail').style.setProperty('--sd',stageCols[i]);sb.forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-selected',k===i)});
+  sdStep.textContent='Stage 0'+(i+1);sdTitle.textContent=s.t;sdText.textContent=s.x;sdBig.textContent=s.big;sdProof.textContent=s.p;sdSrc.textContent=s.s;
+  sdTools.innerHTML=s.tools.map(t=>'<span class="chip">'+t+'</span>').join('')}
+sb.forEach((b,i)=>b.addEventListener('click',()=>showStage(i)));showStage(0);
+
+/* skills */
+const skills=[
+ ['db','DB','SQL & databases','Databases',['SQL Server','SSMS','Oracle','T-SQL','Window functions','Stored procedures','Backup & recovery']],
+ ['db','DM','Data modelling','Databases',['Database design','Star schemas','Master data management','Data dictionaries']],
+ ['an','BI','Power BI & visualisation','Analytics & BI',['Power BI','DAX','Data models','Paginated reports','Tableau','Power Query']],
+ ['an','ST','Statistics & analysis','Analytics & BI',['SPSS','Stata','R','Hypothesis testing','Forecasting','Cohort analysis']],
+ ['an','XL','Reporting','Analytics & BI',['Advanced Excel','KPI reporting','Executive dashboards','Donor reporting']],
+ ['eng','PY','Python','Engineering',['Pandas','NumPy','Validation pipelines','Automation','EDA']],
+ ['eng','ET','ETL & cloud','Engineering',['ETL','Azure Data Factory','Azure Synapse','Snowflake','Redshift','AWS']],
+ ['eng','GH','DevOps for data','Engineering',['Git','GitHub Actions','GitHub Pages','REST APIs']],
+ ['gov','GV','Data governance','Governance & security',['GDPR','Data quality frameworks','Audit ready records','Stewardship']],
+ ['gov','CS','Cybersecurity','Governance & security',['ISO 27001','NIST CSF','Risk management','Digital forensics','Network security']],
+ ['field','SV','Survey & field data','Field data',['KoboToolbox','XLSForm','Skip logic','GPS capture','Enumerator management']],
+ ['field','FS','Food security indicators','Field data',['FCS','HFIAS','rCSI','HDDS','MDD-W','Washington Group questions']],
+ ['lead','LD','Leadership & training','Delivery & leadership',['35+ officers trained','Mentoring','Curriculum design','Stakeholder briefings']],
+ ['lead','MD','Delivery methods','Delivery & leadership',['Agile','Scrum','PRINCE2','Requirements gathering','Root cause analysis']],
+ ['lead','TL','Workplace tools','Delivery & leadership',['Microsoft 365','SharePoint','Teams','Jira','Visio']]];
+const sg=document.getElementById('skillGrid');
+sg.innerHTML=skills.map(s=>'<div class="card sk" data-cat="'+s[0]+'"><div class="hd"><span class="ic">'+s[1]+'</span><div><h3>'+s[2].replace('&','&amp;')+'</h3><div class="cat">'+s[3].replace('&','&amp;')+'</div></div></div><div class="tags">'+s[4].map(t=>'<span class="chip">'+t.replace('&','&amp;')+'</span>').join('')+'</div></div>').join('');
+function filt(boxId,itemSel){const box=document.getElementById(boxId);box.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+  box.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll(itemSel).forEach(c=>c.classList.toggle('hide',b.dataset.f!=='all'&&c.dataset.cat!==b.dataset.f))}))}
+filt('skillFilters','.sk');filt('certFilters','.cert');
+
+/* career gantt, drawn to scale */
+const rows=[
+ ['Richmond & Wandsworth','DBA and Data Management Analyst',2026.82,2027.0,'job','Oct 2026 to present'],
+ ['NISER · SOSAN','Survey Data Manager (Consultant)',2026.58,2026.8,'con','Aug 2026 to present'],
+ ['Gateway Qualifications','SME Consultant, Data Analytics',2025.5,2026.83,'con','Jul 2025 to present'],
+ ['MSc Cybersecurity','Buckinghamshire New University',2024.0,2025.75,'edu','2024 to 2025, Distinction'],
+ ['Windsor Forest','Exams Administrator',2024.17,2025.8,'job','Mar 2024 to Oct 2025'],
+ ['USAID LEARN to Read','Data Manager (Consultant)',2023.08,2024.63,'con','Feb 2023 to Aug 2024'],
+ ['NISER','Data Analyst and Analytics Manager',2019.92,2023.88,'job','Dec 2019 to Nov 2023'],
+ ['MSc Information Science','University of Ibadan',2015.0,2017.5,'edu','2015 to 2017, Distinction'],
+ ['E Merchant CM','Database Administrator',2014.08,2015.55,'job','Feb 2014 to Jul 2015']];
+const tip=document.createElement('div');tip.className='tip';tip.hidden=true;document.body.appendChild(tip);
+function drawGantt(){
+  const css=getComputedStyle(document.documentElement),col={job:css.getPropertyValue('--cyan'),con:css.getPropertyValue('--amber'),edu:css.getPropertyValue('--mint')};
+  const g=document.getElementById('gantt'),narrow=g.clientWidth<600;
+  const W=narrow?360:1040,L=narrow?20:190,R=narrow?20:20,T=narrow?4:10,rh=narrow?46:34,H=T+rows.length*rh+30,y0=2014,y1=2027,sx=v=>L+(v-y0)/(y1-y0)*(W-L-R),step=narrow?2:1;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Career timeline from 2014 to 2026">';
+  for(let y=y0;y<=y1;y++){if(narrow&&y%step)continue;s+='<line class="grid" x1="'+sx(y)+'" x2="'+sx(y)+'" y1="'+T+'" y2="'+(H-24)+'"/>';s+='<text x="'+sx(y)+'" y="'+(H-8)+'" text-anchor="middle">'+y+'</text>'}
+  rows.forEach((r,i)=>{const y=T+i*rh+(narrow?20:6),x=sx(r[2]),w=Math.max(8,sx(r[3])-x);
+    if(narrow){const lx=Math.min(Math.max(x,L),W-R);const anchor=x>W*0.55?'end':'start';s+='<text class="lbl" x="'+(anchor==='end'?sx(r[3]):x)+'" y="'+(y-5)+'" text-anchor="'+anchor+'">'+r[0].replace('&','&amp;')+'</text>'}
+    else s+='<text class="lbl" x="'+(L-12)+'" y="'+(y+15)+'" text-anchor="end">'+r[0].replace('&','&amp;')+'</text>';
+    s+='<rect class="bar" data-i="'+i+'" x="'+x+'" y="'+y+'" width="'+w+'" height="'+(narrow?14:20)+'" rx="4" fill="'+col[r[4]]+'"/>'});
+  s+='</svg>';g.innerHTML=s;
+  g.querySelectorAll('.bar').forEach(b=>{const r=rows[b.dataset.i];
+    const show=e=>{tip.innerHTML='<b>'+r[1]+'</b>'+r[0].replace('&','&amp;')+'<br><span>'+r[5]+'</span>';tip.hidden=false;const px=(e.touches?e.touches[0]:e).clientX,py=(e.touches?e.touches[0]:e).clientY;tip.style.left=Math.min(px+14,innerWidth-300)+'px';tip.style.top=(py+14)+'px'};
+    b.addEventListener('mousemove',show);b.addEventListener('click',show);b.addEventListener('mouseleave',()=>tip.hidden=true)});
+}
+drawGantt();let gw=innerWidth;addEventListener('resize',()=>{if(Math.abs(innerWidth-gw)>40){gw=innerWidth;drawGantt()}});addEventListener('scroll',()=>tip.hidden=true,{passive:true});
+
+/* trained officers dot matrix */
+document.getElementById('dots').innerHTML=Array.from({length:36},(_,i)=>'<i class="'+(i<35?'on':'')+'"></i>').join('');
+
+/* gauges */
+const C=2*Math.PI*54;
+document.querySelectorAll('.gauge').forEach(g=>{const v=g.querySelector('.val');v.style.strokeDasharray=C;v.style.strokeDashoffset=C*(1-g.dataset.p/100)});
+
+/* count up + reveal on scroll */
+function countUp(el){const end=+el.dataset.count,suf=el.dataset.suffix||'';if(still)return;const t0=performance.now(),dur=1400;
+  (function f(t){const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);el.textContent=Math.round(end*e).toLocaleString('en-GB')+suf;if(k<1)requestAnimationFrame(f)})(t0)}
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;const el=x.target;el.classList.add('in');
+  el.querySelectorAll?.('[data-count]').forEach(countUp);if(el.matches('[data-count]'))countUp(el);
+  if(el.classList.contains('gauge')&&!still){const v=el.querySelector('.val');v.style.transition='none';v.style.strokeDashoffset=C;v.getBoundingClientRect();v.style.transition='';v.style.strokeDashoffset=C*(1-el.dataset.p/100)}
+  io.unobserve(el)}),{threshold:.2});
+document.querySelectorAll('.rv,.kpis,.reach .card').forEach((el,k)=>{el.style.transitionDelay=(k%3)*60+'ms';io.observe(el)});
+const fun=document.getElementById('funnel');new IntersectionObserver((es,o)=>{if(es[0].isIntersecting&&!still){fun.querySelectorAll('.fill').forEach(f=>{f.style.transition='none';f.style.width='0';f.getBoundingClientRect();f.style.transition='';f.style.width=f.dataset.w+'%'});o.disconnect()}},{threshold:.4}).observe(fun);
+
+/* progress bar, active nav, back to top */
+const bar=document.querySelector('.progress'),fab=document.querySelector('.fab');
+const links=[...document.querySelectorAll('nav a')],secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+addEventListener('scroll',()=>{const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);bar.style.width=(p*100)+'%';
+  fab.classList.toggle('show',h.scrollTop>700);let cur=-1;secs.forEach((s,k)=>{if(s&&s.getBoundingClientRect().top<140)cur=k});links.forEach((a,k)=>a.classList.toggle('active',k===cur))},{passive:true});
+fab.addEventListener('click',()=>scrollTo({top:0,behavior:still?'auto':'smooth'}));
+</script>
 
 </body>
 </html>
