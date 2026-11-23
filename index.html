@@ -506,6 +506,20 @@ h3,.job .t,.stage h3,.sk h3,.cert h3{font-family:var(--body);font-weight:700;let
 .pub-info .tags{display:flex;flex-wrap:wrap;gap:6px}
 .pub-info .chip{white-space:nowrap}
 .pub-link{margin:0 0 16px}
+.journal{display:grid;grid-template-columns:200px minmax(0,1fr);overflow:hidden}
+.j-side{background:linear-gradient(160deg,color-mix(in srgb,var(--cyan) 14%,var(--panel)),color-mix(in srgb,var(--violet) 14%,var(--panel)));padding:24px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.j-badge{align-self:flex-start;font:600 11.5px var(--mono);padding:4px 10px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--violet)}
+.j-year{font:800 40px var(--display);color:var(--cyan2);letter-spacing:-.02em;line-height:1}
+.j-src{font-size:13.5px;color:var(--muted);font-weight:600}
+.j-main{padding:24px}
+.j-main h3{font-size:19px;line-height:1.3}
+.j-cite{font-size:14px;color:var(--muted);margin:8px 0 12px}
+.j-main ul{margin:0 0 16px;padding-left:18px}
+.j-main li{margin-bottom:6px;font-size:15px}
+.j-main li::marker{color:var(--cyan)}
+.j-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.j-foot .tags{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:700px){.journal{grid-template-columns:1fr}.j-side{border-right:0;border-bottom:1px solid var(--line);flex-direction:row;align-items:center;flex-wrap:wrap}.j-year{font-size:28px}}
 .credit{border-left:3px solid var(--violet);background:color-mix(in srgb,var(--violet) 7%,var(--panel));padding:12px 16px;border-radius:0 10px 10px 0;font-size:14px;color:var(--muted);margin-bottom:18px}
 .credit b{color:var(--fg)}
 .thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
@@ -537,7 +551,7 @@ h3,.job .t,.stage h3,.sk h3,.cert h3{font-family:var(--body);font-weight:700;let
         <li><a href="#skills">Skills</a></li>
         <li><a href="#journey">Journey</a></li>
         <li><a href="#casestudy">Case study</a></li>
-        <li><a href="#publication">Publication</a></li>
+        <li><a href="#publication">Publications</a></li>
         <li><a href="#impact">Impact</a></li>
         <li><a href="#credentials">Credentials</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -798,14 +812,15 @@ h3,.job .t,.stage h3,.sk h3,.cert h3{font-family:var(--body);font-weight:700;let
 <section class="band" id="publication">
   <div class="wrap">
     <div class="sec-head rv">
-      <div><div class="eyebrow">Featured publication</div><h2>Monetary Child Poverty in <span class="grad">Nigeria</span></h2></div>
-      <p>A national report published in May 2022 by the Federal Ministry of Finance, Budget and National Planning with UNICEF Nigeria and the National Bureau of Statistics. I designed its infographics and laid out the report.</p>
+      <div><div class="eyebrow">Publications</div><h2>Research and reports in <span class="grad">print</span></h2></div>
+      <p>A national child poverty report for the Federal Government and UNICEF Nigeria, and a peer reviewed journal article from my MSc research.</p>
     </div>
     <div class="pub">
       <button class="pub-cover rv js-zoom" type="button" data-src="unicef-cover.jpg" data-cap="Front cover"><img src="unicef-cover.jpg" alt="Front cover of the Monetary Child Poverty in Nigeria report" width="820" height="1159" loading="lazy"><span class="tag">UNICEF · FMFBNP</span></button>
       <div class="pub-info rv">
         <div class="card">
-          <h3>From national survey tables to a report policymakers read</h3>
+          <h3>Monetary Child Poverty in Nigeria</h3>
+          <p style="color:var(--muted);font-size:14.5px;margin-top:6px">Published in May 2022 by the Federal Ministry of Finance, Budget and National Planning with UNICEF Nigeria and the National Bureau of Statistics. I designed its infographics and laid out the report.</p>
           <div class="pub-meta"><span>Published May 2022</span><span>5 chapters</span><span>36 states + FCT</span><span>CorelDRAW</span></div>
           <ul>
             <li>Designed the report's infographics and laid out the full document, from cover and chapter openers to every table and figure</li>
@@ -825,6 +840,21 @@ h3,.job .t,.stage h3,.sk h3,.cert h3{font-family:var(--body);font-weight:700;let
       </div>
     </div>
   </div>
+<div class="wrap" style="margin-top:28px">
+  <article class="card journal rv">
+    <div class="j-side"><span class="j-badge">Peer reviewed</span><div class="j-year">2021</div><div class="j-src">Journal of Information &amp; Knowledge Management</div></div>
+    <div class="j-main">
+      <h3>Factors Influencing Knowledge Sharing Behaviour of Police Officers in Ibadan Metropolis, Nigeria</h3>
+      <p class="j-cite">Adekannbi, J. O. &amp; Bello, O. (2021). <i>Journal of Information &amp; Knowledge Management</i>, 20(2), 1–23. World Scientific.</p>
+      <ul>
+        <li>Built from my MSc Information Science thesis at the University of Ibadan, co-authored with my supervisor, Dr Janet Adekannbi</li>
+        <li>Surveyed 134 officers at Oyo State Police Headquarters with a structured questionnaire, using a modified Theory of Reasoned Action</li>
+        <li>Found that leadership, trust, rewards, reciprocal benefits and enjoyment in helping others shaped officers' intention to share knowledge</li>
+      </ul>
+      <div class="j-foot"><div class="tags"><span class="chip">Survey research</span><span class="chip">Correlation analysis</span><span class="chip">Knowledge management</span></div><a class="btn btn-ghost" href="https://doi.org/10.1142/S0219649221500179" target="_blank" rel="noopener">Read the article ↗</a></div>
+    </div>
+  </article>
+</div>
 </section>
 
 <section class="band alt" id="impact">
